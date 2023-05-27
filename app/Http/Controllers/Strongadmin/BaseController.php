@@ -27,7 +27,7 @@ class BaseController extends Controller
     }
 
     /**
-     * 獲取登錄使用者資訊
+     * 获取登录用户信息
      * @return User
      */
     protected function getUser()

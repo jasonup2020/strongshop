@@ -120,7 +120,7 @@ class ShippingOptionConfigController extends BaseController
     {
         if (!$request->expectsJson())
         {
-            //國家
+            //国家
             $countries = RegionCountry::query()->orderBy('en_name')->get();
             if ($request->create)
             {
@@ -164,7 +164,7 @@ class ShippingOptionConfigController extends BaseController
             if ($exists_config)
             {
                 $exists_country = RegionCountry::where('iso2', $country)->first();
-                return ['code' => 4001, 'message' => sprintf('國家[%s, %s, %s]已存在於： %s', $exists_country->iso2, $exists_country->en_name, $exists_country->cn_name, $exists_config->title)];
+                return ['code' => 4001, 'message' => sprintf('国家[%s, %s, %s]已存在于： %s', $exists_country->iso2, $exists_country->en_name, $exists_country->cn_name, $exists_config->title)];
             }
         }
         $shippingOptionConfig->fill($request->all());
@@ -194,7 +194,7 @@ class ShippingOptionConfigController extends BaseController
     {
         if (!$request->expectsJson())
         {
-            //國家
+            //国家
             $countries = RegionCountry::query()->orderBy('en_name')->get();
             $model = $shippingOptionConfig::find($request->id);
             $more = $model->more;
@@ -238,7 +238,7 @@ class ShippingOptionConfigController extends BaseController
             if ($exists_config)
             {
                 $exists_country = RegionCountry::where('iso2', $country)->first();
-                return ['code' => 4001, 'message' => sprintf('國家[%s, %s, %s]已存在於： %s', $exists_country->iso2, $exists_country->en_name, $exists_country->cn_name, $exists_config->title)];
+                return ['code' => 4001, 'message' => sprintf('国家[%s, %s, %s]已存在于： %s', $exists_country->iso2, $exists_country->en_name, $exists_country->cn_name, $exists_config->title)];
             }
         }
 

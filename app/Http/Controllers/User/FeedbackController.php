@@ -191,12 +191,12 @@ class FeedbackController extends Controller
         $model->select('id', 'user_id', 'type', 'title', 'content', 'created_at', 'updated_at', 'admin_id');
         $model->with('adminUser:id,name');
         $rows = $model->paginate(100);
-        //標記為已讀
+        //标记为已读
         UserFeedback::where('parent_id', $request->parent_id)->update(['read_at' => now()]);
         //$rows->makeHidden(['deleted_at']);
 
         $feedback = UserFeedback::where('user_id', $this->user->id)->with('adminUser:id,name')->find($request->parent_id);
-        $feedback->read_at = now(); //標記為已讀
+        $feedback->read_at = now(); //标记为已读
         $feedback->save();
         
         if ($this->isApi)

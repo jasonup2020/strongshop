@@ -186,8 +186,8 @@ class ProductController extends BaseController
     {
         if (!$request->expectsJson())
         {
-            $categories = ProductRepositories::categoryTree(); //分類
-            //規格
+            $categories = ProductRepositories::categoryTree(); //分类
+            //规格
             $specGroups = SpecGroup::query()->get();
             $specs = [];
             $brands = Brand::query()->get(); //品牌
@@ -204,29 +204,29 @@ class ProductController extends BaseController
         {
             return ['code' => 3001, 'message' => $validator->errors()->first(), 'data' => $validator->errors()];
         }
-        // 同屬於一個 spu 的 產品(sku)，價格規格不能重複
+        // 同属于一个 spu 的 产品(sku)，价格规格不能重复
         $exists_spec_sku = ProductRepositories::checkUniqueSpec($request->productSpecs, $request->spu);
         if ($exists_spec_sku !== false)
         {
-            return ['code' => 4001, 'message' => "規格重複，同屬于spu({$request->spu})的產品價格規格已存在，該產品 sku 為： {$exists_spec_sku}"];
+            return ['code' => 4001, 'message' => "规格重复，同属于spu({$request->spu})的产品价格规格已存在，该产品 sku 为： {$exists_spec_sku}"];
         }
 
         $product->fill($data);
         DB::transaction(function() use($product, $request) {
-            $productSpecs = ProductRepositories::pluckSpecs($request->productSpecs); //處理前端提交的產品規格
-            $categories = ProductRepositories::pluckCategoryId($request->categories); //處理前端提交的分類樹數據
-            //產品儲存
+            $productSpecs = ProductRepositories::pluckSpecs($request->productSpecs); //处理前端提交的产品规格
+            $categories = ProductRepositories::pluckCategoryId($request->categories); //处理前端提交的分类树数据
+            //产品保存
             $product->save();
 
             /*
-             * 模型同步關聯 sync 
-             * 使用方式參考：https://learnku.com/docs/laravel/6.x/eloquent-relationships/5177#3733b2
+             * 模型同步关联 sync 
+             * 使用方式参考：https://learnku.com/docs/laravel/6.x/eloquent-relationships/5177#3733b2
              */
-            $product->categories()->sync($categories); //儲存分類
-            $product->specs()->sync($productSpecs); //儲存規格
+            $product->categories()->sync($categories); //保存分类
+            $product->specs()->sync($productSpecs); //保存规格
         });
         
-        //清除首頁推薦商品快取
+        //清除首页推荐商品缓存
         Cache::forget('product:home');
         
         return [
@@ -250,7 +250,7 @@ class ProductController extends BaseController
             $model = $product::find($request->id);
             $ids = $model->categories->pluck('id')->toArray();
             $categories = ProductRepositories::categoryTree($ids);
-            $specGroups = SpecGroup::query()->get(); //規格組列表
+            $specGroups = SpecGroup::query()->get(); //规格组列表
             $brands = Brand::query()->get(); //品牌
             return $this->view('product.form', ['model' => $model, 'categories' => $categories, 'specGroups' => $specGroups, 'brands' => $brands]);
         }
@@ -279,11 +279,11 @@ class ProductController extends BaseController
         }
         if ($request->productSpecs && $request->spu)
         {
-            // 同屬於一個 spu 的 產品(sku)，價格規格不能重複
+            // 同属于一个 spu 的 产品(sku)，价格规格不能重复
             $exists_spec_sku = ProductRepositories::checkUniqueSpec($request->productSpecs, $request->spu, $request->id);
             if ($exists_spec_sku !== false)
             {
-                return ['code' => 4001, 'message' => "規格重複，同屬于spu({$request->spu})的產品價格規格已存在，該產品 sku 為： {$exists_spec_sku}"];
+                return ['code' => 4001, 'message' => "规格重复，同属于spu({$request->spu})的产品价格规格已存在，该产品 sku 为： {$exists_spec_sku}"];
             }
         }
         $model = $product::find($request->id);
@@ -291,20 +291,20 @@ class ProductController extends BaseController
         $logDirty = $model->getDirty();
         $logOriginal = $model->getOriginal();
         DB::transaction(function() use($model, $request) {
-            $productSpecs = ProductRepositories::pluckSpecs($request->productSpecs); //處理前端提交的產品規格
-            $categories = ProductRepositories::pluckCategoryId($request->categories); //處理前端提交的分類樹數據
-            //產品儲存
+            $productSpecs = ProductRepositories::pluckSpecs($request->productSpecs); //处理前端提交的产品规格
+            $categories = ProductRepositories::pluckCategoryId($request->categories); //处理前端提交的分类树数据
+            //产品保存
             $model->save();
 
             /*
-             * 模型同步關聯 sync 
-             * 使用方式參考：https://learnku.com/docs/laravel/6.x/eloquent-relationships/5177#3733b2
+             * 模型同步关联 sync 
+             * 使用方式参考：https://learnku.com/docs/laravel/6.x/eloquent-relationships/5177#3733b2
              */
-            $model->categories()->sync($categories); //儲存分類
-            $model->specs()->sync($productSpecs); //儲存規格
+            $model->categories()->sync($categories); //保存分类
+            $model->specs()->sync($productSpecs); //保存规格
         });
         
-        //清除首頁推薦商品快取
+        //清除首页推荐商品缓存
         Cache::forget('product:home');
         
         return [
@@ -353,7 +353,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * 產品規格 html部分
+     * 产品规格 html部分
      * @param Request $request
      * @return type
      */
@@ -363,7 +363,7 @@ class ProductController extends BaseController
         $productSpecs = [];
         if ($request->specGroupId)
         {
-            //已有的規格列表
+            //已有的规格列表
             $specs = Spec::query()
                     ->orderBy('spec_type')
                     ->where('spec_group_id', $request->specGroupId)
@@ -372,7 +372,7 @@ class ProductController extends BaseController
         }
         if ($request->productId)
         {
-            //已選的產品規格列表
+            //已选的产品规格列表
             $model = Product::find($request->productId);
             $productSpecs = $model->specs()->pluck('spec_value', 'spec_id');
         }
@@ -381,7 +381,7 @@ class ProductController extends BaseController
     }
 
     /**
-     * 複製
+     * 复制
      * @param Request $request
      * @param Product $product
      * @return type
@@ -391,7 +391,7 @@ class ProductController extends BaseController
         $model = $product::find($request->id);
         $ids = $model->categories->pluck('id')->toArray();
         $categories = ProductRepositories::categoryTree($ids);
-        $specGroups = SpecGroup::query()->get(); //規格組列表
+        $specGroups = SpecGroup::query()->get(); //规格组列表
         $brands = Brand::query()->get(); //品牌
         return $this->view('product.form', ['model' => $model, 'categories' => $categories, 'specGroups' => $specGroups, 'brands' => $brands, '_action' => route('product.create')]);
     }

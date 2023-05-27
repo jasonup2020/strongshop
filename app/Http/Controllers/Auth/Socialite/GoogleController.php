@@ -19,7 +19,7 @@ class GoogleController extends Controller
 {
 
     /**
-     * 將使用者重定向到授權頁面
+     * 将用户重定向到授权页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,7 +29,7 @@ class GoogleController extends Controller
     }
 
     /**
-     * 獲取使用者資訊
+     * 获取用户信息
      *
      * @return \Illuminate\Http\Response
      */

@@ -24,7 +24,7 @@ class LayoutsComposer
     }
 
     /**
-     * 將數據繫結到檢視
+     * 将数据绑定到视图
      *
      * @param  View  $view
      * @return void
@@ -39,15 +39,15 @@ class LayoutsComposer
 
         //商店配置
         //$view->with('_STRONGSHOP_CONFIG', AppRepository::getShopConfig());
-        //語言
+        //语言
         $view->with('_languages', AppRepository::getLanguages());
-        //貨幣
-        $view->with('_currencies', AppRepository::getCurrencies()); //貨幣列表
-        //產品分類
+        //货币
+        $view->with('_currencies', AppRepository::getCurrencies()); //货币列表
+        //产品分类
         $view->with('_categories', ProductRepository::getCategories());
-        //產品收藏總數
+        //产品收藏总数
         $view->with('_wish_list_total', \DB::table('user_collect')->where('user_id', $user_id)->count());
-        //未讀反饋回覆
+        //未读反馈回复
         $view->with('_unread_feedback_replies_total', \DB::table('user_feedback')->where('user_id', $user_id)->where('status', 2)->whereNull('read_at')->count() ?: '');
     }
 

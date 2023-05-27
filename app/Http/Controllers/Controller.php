@@ -24,7 +24,7 @@ class Controller extends BaseController
     use AppTrait;
 
     /**
-     * 渲染錯誤
+     * 渲染错误
      * @param int $code
      * @param string $message
      * @param array $data

@@ -112,9 +112,9 @@ class UserPushNotificationController extends BaseController
                         ],
                         [],
                         [
-                            'batchSendMail.title' => '郵件標題',
-                            'batchSendMail.content' => '郵件內容',
-                            'batchSendMail.sendtime' => '發送時間',
+                            'batchSendMail.title' => '邮件标题',
+                            'batchSendMail.content' => '邮件内容',
+                            'batchSendMail.sendtime' => '发送时间',
                         ]
         );
         if ($validator->fails())

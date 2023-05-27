@@ -72,7 +72,7 @@ class CommentController extends Controller
             'content' => __('comment content'),
         ];
         $customMessages = [
-            'more.steps.*.content' => ':more.steps.*.content 不能為空',
+            'more.steps.*.content' => ':more.steps.*.content 不能为空',
         ];
         $validator = Validator::make($request->all(), $rules, $customMessages, $customAttributes);
         if ($validator->fails())
@@ -95,7 +95,7 @@ class CommentController extends Controller
         $model->product_spu = isset($product) ? $product->spu : '';
         $model->status = 2;
         $model->credits = (int) app('strongshop')->getShopConfig('commet_reward_credits');
-        $model->content = $request->content; //評論內容
+        $model->content = $request->content; //评论内容
         $model->pictures = $request->pictures;
         $model->videos = $request->videos;
         $model->star = $request->star;

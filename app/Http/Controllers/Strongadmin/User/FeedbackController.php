@@ -160,7 +160,7 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * 回覆反饋
+     * 回复反馈
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\UserFeedback  $userFeedback
@@ -202,7 +202,7 @@ class FeedbackController extends BaseController
             if ($request->emailNotify)
             {
                 $newFeedbackModel = UserFeedback::orderByDesc('id')->where('user_id', $model->user_id)->first();
-                //發送郵件通知
+                //发送邮件通知
                 $user = User::find($model->user_id);
                 Mail::to($user)->send(new \App\Mail\FeedbackReply($user, $reply, $newFeedbackModel));
             }

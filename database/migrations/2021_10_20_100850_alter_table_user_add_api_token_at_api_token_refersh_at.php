@@ -4,8 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class InitDatabase extends Migration
+class AlterTableUserAddApiTokenAtApiTokenRefershAt extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,10 +14,9 @@ class InitDatabase extends Migration
      */
     public function up()
     {
-        $file = storage_path('install/sql/strongshop.v1.0.sql');
-//        $file = storage_path('install/sql/import_strongshop.v1.0.sql');
-        $sql = file_get_contents($file);
-        DB::unprepared($sql);
+        DB::unprepared("ALTER TABLE `st_user` 
+ADD COLUMN `api_token_at` datetime(0) NULL COMMENT 'api token 有效期至' AFTER `api_token`,
+ADD COLUMN `api_token_refresh_at` datetime(0) NULL COMMENT 'api token 刷新时间' AFTER `api_token_at`;");
     }
 
     /**
@@ -28,4 +28,5 @@ class InitDatabase extends Migration
     {
         //
     }
+
 }

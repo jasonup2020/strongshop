@@ -26,8 +26,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    public $maxAttempts = 3; //允許登錯幾次
-    public $decayMinutes = 5; //登錄失敗超過 $maxAttempts 次 禁止 $decayMinutes 分鐘登錄
+    public $maxAttempts = 3; //允许登错几次
+    public $decayMinutes = 5; //登录失败超过 $maxAttempts 次 禁止 $decayMinutes 分钟登录
 
     public function __construct()
     {
@@ -53,7 +53,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 登錄
+     * 登录
      * @param Request $request
      * @return type
      */
@@ -61,7 +61,7 @@ class LoginController extends Controller
     {
         $rules = [
             'username' => ['required', 'string', 'email', 'max:255', 'exists:user,email'],
-            'way' => ['string', 'min:4', 'max:99', 'in:code,password'], //登錄方式
+            'way' => ['string', 'min:4', 'max:99', 'in:code,password'], //登录方式
             'password' => ['required_if:way,password', 'string', 'min:6'],
             'code' => ['required_if:way,code', 'string'],
             'remember' => ['boolean'],
@@ -77,7 +77,7 @@ class LoginController extends Controller
             return ['code' => 3001, 'message' => $validator->errors()->first(), 'data' => $validator->errors()];
         }
         /**
-         * 登錄失敗次數限制
+         * 登录失败次数限制
          * If the class is using the ThrottlesLogins trait, we can automatically throttle
          * the login attempts for this application. We'll key this by the username and
          * the IP address of the client making these requests into this application.
@@ -91,13 +91,13 @@ class LoginController extends Controller
             ];
             return ['code' => 4001, 'message' => __('auth.throttle', $replace)];
         }
-        $user_name = $this->username(); //登錄欄位
+        $user_name = $this->username(); //登录字段
         $user = User::where($user_name, $request->username)->first();
         if (!$user || $user->status !== 1)
         {
             return ['code' => 4010, 'message' => __('auth.failed')];
         }
-        //驗證碼登錄
+        //验证码登录
         if ($request->way === 'code')
         {
             $_code = AuthRepository::getCode($request->username);
@@ -113,22 +113,22 @@ class LoginController extends Controller
         {
             if (!Hash::check($request->password, $user->password))
             {
-                $this->incrementLoginAttempts($request); //累加登錄失敗次數
+                $this->incrementLoginAttempts($request); //累加登录失败次数
                 return ['code' => 4002, 'message' => __('auth.failed')];
             }
         }
 
         if ($this->isApi)
         {
-            //api登錄
+            //api登录
             $user->api_token = AuthRepository::generateApiToken();
             $user->api_token_at = config('strongshop.apiToken.ttl') ? now()->addSeconds(config('strongshop.apiToken.ttl')) : null;
             $user->api_token_refresh_at = config('strongshop.apiToken.refresh_ttl') ? now()->addSeconds(config('strongshop.apiToken.refresh_ttl')) : null;
-            //觸發`登錄成功`事件（如果是web登錄 `Auth::guard($this->guard)->login()` 已自動觸發事件，無需再次觸發）
+            //触发`登录成功`事件（如果是web登录 `Auth::guard($this->guard)->login()` 已自动触发事件，无需再次触发）
             event(new Login($this->guard, $user, $request->remember));
         } else
         {
-            //web登錄
+            //web登录
             Auth::guard($this->guard)->login($user, $request->remember);
             if (app('strongshop')->getShopConfig('signin_tip_email_verified') && $user instanceof MustVerifyEmail && !$user->hasVerifiedEmail())
             {
@@ -137,9 +137,9 @@ class LoginController extends Controller
         }
 
         /*
-         *  登錄成功后邏輯
+         *  登录成功后逻辑
          */
-        $this->clearLoginAttempts($request); //清除登錄鎖定
+        $this->clearLoginAttempts($request); //清除登录锁定
         $user->last_login_ip = $request->ip();
         $user->last_login_at = now();
         $user->save();
@@ -151,7 +151,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 驗證碼
+     * 验证码
      * @return type
      */
     public function loginCode(Request $request)
@@ -205,7 +205,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 登錄欄位
+     * 登录字段
      * @return string
      */
     public function username()

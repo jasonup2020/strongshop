@@ -6,7 +6,7 @@ use Illuminate\View\View;
 use App\Repositories\AppRepository;
 
 /**
- * 配置檢視全域性變數
+ * 配置视图全局变量
  */
 class GlobalStrongShopComposer
 {
@@ -24,7 +24,7 @@ class GlobalStrongShopComposer
     }
 
     /**
-     * 將數據繫結到檢視
+     * 将数据绑定到视图
      *
      * @param  View  $view
      * @return void
@@ -35,8 +35,8 @@ class GlobalStrongShopComposer
         {
             return;
         }
-        $view->with('_current_currency', AppRepository::getCurrentCurrency()); //目前貨幣code
-        $view->with('_current_currency_name', AppRepository::getCurrentCurrencyName()); //目前貨幣名稱
+        $view->with('_current_currency', AppRepository::getCurrentCurrency()); //当前货币code
+        $view->with('_current_currency_name', AppRepository::getCurrentCurrencyName()); //当前货币名称
     }
 
 }

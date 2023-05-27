@@ -31,7 +31,7 @@ class ShoppingCartController extends Controller
         $data = CartRepository::getCart();
         if (config('strongshop.showShipingFeeInCart'))
         {
-            //顯示配送費用
+            //显示配送费用
             if ($request->shipping_option_id)
             {
                 $shipping_total = ShippingRepository::getShippingFee($data['cart_weight'], $request->shipping_option_id, $request->country_code);
@@ -42,7 +42,7 @@ class ShoppingCartController extends Controller
             }
         } else
         {
-            $shipping_total = false; // false 表示不顯示配送費用
+            $shipping_total = false; // false 表示不显示配送费用
         }
         $data['total']['shipping_total'] = $shipping_total;
         $content = (string) view('layouts.includes.navCart', ['_cart' => $data]);
@@ -55,7 +55,7 @@ class ShoppingCartController extends Controller
         $data = CartRepository::getCart();
         if (config('strongshop.showShipingFeeInCart'))
         {
-            //顯示配送費用
+            //显示配送费用
             if ($request->shipping_option_id)
             {
                 $shipping_total = ShippingRepository::getShippingFee($data['cart_weight'], $request->shipping_option_id, $request->country_code);
@@ -66,7 +66,7 @@ class ShoppingCartController extends Controller
             }
         } else
         {
-            $shipping_total = false; // false 表示不顯示配送費用
+            $shipping_total = false; // false 表示不显示配送费用
         }
         $data['total']['shipping_total'] = $shipping_total;
         $content = (string) view('layouts.includes.shoppingcart', ['_cart' => $data]);
@@ -85,7 +85,7 @@ class ShoppingCartController extends Controller
         $rules = [
             'product_id' => ['required', 'integer', Rule::exists('product', 'id')->where('status', 1)->whereNull('deleted_at')],
             'qty' => ['required', 'integer', 'min:1', 'max:99999'],
-            'buyNow' => ['nullable', 'in:0,1'], //是否是立即購買
+            'buyNow' => ['nullable', 'in:0,1'], //是否是立即购买
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails())
@@ -101,7 +101,7 @@ class ShoppingCartController extends Controller
         {
             return ['code' => 4003, 'message' => __('Ther product stockout.')];
         }
-        //如果是立即購買
+        //如果是立即购买
         if ($request->buyNow)
         {
             if (!$this->user)
@@ -143,7 +143,7 @@ class ShoppingCartController extends Controller
                 $model->product_price = $productModel->getOriginal('sale_price');
             }
         }
-        //最小起訂量限制
+        //最小起订量限制
         if ($productModel->wholesale_set && !empty($productModel->wholesale_set['num']))
         {
             foreach ($productModel->wholesale_set['num'] as $numVal)
@@ -155,7 +155,7 @@ class ShoppingCartController extends Controller
                 return ['code' => 4004, 'message' => __('Ther product MOQ: :num', ['num' => $productModel->wholesale_set['num'][0]])];
             }
         }
-        //檢測庫存
+        //检测库存
         if ($model->qty > $productModel->stock)
         {
             return ['code' => 4002, 'message' => __('Ther product only :num left.', ['num' => $productModel->stock])];
@@ -204,7 +204,7 @@ class ShoppingCartController extends Controller
         }
         $model->qty = $request->qty;
 
-        //最小起訂量限制
+        //最小起订量限制
         if ($model->product->wholesale_set && !empty($model->product->wholesale_set['num']))
         {
             foreach ($model->product->wholesale_set['num'] as $numVal)
@@ -217,7 +217,7 @@ class ShoppingCartController extends Controller
             }
         }
 
-        //檢測庫存
+        //检测库存
         if ($model->qty > $model->product->stock)
         {
             return ['code' => 4004, 'message' => __('Ther product only :num left.', ['num' => $model->product->stock])];

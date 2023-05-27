@@ -35,13 +35,13 @@ class PaypalController extends Controller
 {
 
     /**
-     * 表單提交支付
+     * 表单提交支付
      * @param type $orderId
      */
     public function payStandard(Request $request)
     {
         $orderId = $request->orderId;
-        //訂單資訊
+        //订单信息
         $order = Order::query()->where('id', $orderId)
                 ->with('orderProducts')
                 ->first();
@@ -63,21 +63,21 @@ class PaypalController extends Controller
         $cancel_url = route('home');
         $return_url = route('paypal.return');
         $notify_url = config('strongshop.payment.paypal.notify_url') ?: route('paypal.notify');
-        //收款賬號
+        //收款账号
         $business = $model->more['business'] ?? config('strongshop.payment.paypal.business');
-        //預設設定結算貨幣
+        //默认设置结算货币
         $defaultCurrencyPay = isset($model->more['currency']) || $model->more['currency'] == null ? $model->more['currency'] : config('strongshop.defaultCurrencyPay');
-        //環境
+        //环境
         $env = $model->more['env'] ?? config('strongshop.env');
 
-        $description = config('app.name'); //訂單描述
-        $currency = $order->currency_code; //訂單貨幣
-        $currency_rate = $order->currency_rate; //訂單貨幣費率
-        $invoiceNumber = $order->order_no; //訂單號
-        $total = $order->order_amount; //支付總額
+        $description = config('app.name'); //订单描述
+        $currency = $order->currency_code; //订单货币
+        $currency_rate = $order->currency_rate; //订单货币费率
+        $invoiceNumber = $order->order_no; //订单号
+        $total = $order->order_amount; //支付总额
 
         /*
-         * 如果`預設設定結算貨幣`和`訂單貨幣`不一致，則強制轉換為 `預設設定結算貨幣`
+         * 如果`默认设置结算货币`和`订单货币`不一致，则强制转换为 `默认设置结算货币`
          */
         if ($defaultCurrencyPay && $defaultCurrencyPay !== $currency)
         {
@@ -98,26 +98,26 @@ class PaypalController extends Controller
 
         $def_form = "<form action='{$url}' method='post'>";
         $def_form .= "<input type='hidden' name='cmd' value='_xclick'>" . // 不能省略
-                "<input type='hidden' name='business' value='{$business}'>" . // 貝寶帳號
+                "<input type='hidden' name='business' value='{$business}'>" . // 贝宝帐号
                 "<input type='hidden' name='item_name' value='{$description}'>" . // payment for
-                "<input type='hidden' name='amount' value='{$total}'>" . // 訂單金額
-                "<input type='hidden' name='currency_code' value='{$currency}'>" . // 貨幣
-                "<input type='hidden' name='return' value='{$return_url}'>" . // 付款后頁面
-                "<input type='hidden' name='invoice' value='{$invoiceNumber}'>" . // 訂單號
+                "<input type='hidden' name='amount' value='{$total}'>" . // 订单金额
+                "<input type='hidden' name='currency_code' value='{$currency}'>" . // 货币
+                "<input type='hidden' name='return' value='{$return_url}'>" . // 付款后页面
+                "<input type='hidden' name='invoice' value='{$invoiceNumber}'>" . // 订单号
                 "<input type='hidden' name='charset' value='utf-8'>" . // 字符集
-                "<input type='hidden' name='no_shipping' value='1'>" . // 不要求客戶提供收貨地址
-                "<input type='hidden' name='no_note' value=''>" . // 付款說明
+                "<input type='hidden' name='no_shipping' value='1'>" . // 不要求客户提供收货地址
+                "<input type='hidden' name='no_note' value=''>" . // 付款说明
                 "<input type='hidden' name='notify_url' value='{$notify_url}'>" .
                 "<input type='hidden' name='rm' value='2'>" .
                 "<input type='hidden' name='cancel_return' value='$cancel_url'>";
-        $def_form .= "<input type='submit' value='Pay With PayPal'>";                      // 按鈕
+        $def_form .= "<input type='submit' value='Pay With PayPal'>";                      // 按钮
         $def_form .= "</form>";
 
         return view('shoppingcart.pay', ['def_form' => $def_form]);
     }
 
     /**
-     * 支付成功后返回頁面
+     * 支付成功后返回页面
      * @param Request $request
      */
     public function successReturn(Request $request)
@@ -130,7 +130,7 @@ class PaypalController extends Controller
     }
 
     /**
-     * 非同步通知
+     * 异步通知
      * @param Request $request
      * @return boolean
      */
@@ -150,8 +150,8 @@ class PaypalController extends Controller
 
         $order_no = $request->post('invoice');
         $transaction_id = $request->post('txn_id');
-        $paid_amount = $request->post('mc_gross'); //實際支付金額
-        $paid_currency = $request->post('mc_currency'); //實際支付貨幣
+        $paid_amount = $request->post('mc_gross'); //实际支付金额
+        $paid_currency = $request->post('mc_currency'); //实际支付货币
 
         $req = 'cmd=_notify-validate';
         foreach ($data as $key => $value)
@@ -188,7 +188,7 @@ class PaypalController extends Controller
     }
 
     /**
-     * 支付訂單資訊
+     * 支付订单信息
      * @param type $orderId
      */
     public function payinfo(Request $request)
@@ -201,7 +201,7 @@ class PaypalController extends Controller
         {
             return ['code' => 3001, 'message' => $validator->errors()->first(), 'data' => $validator->errors()];
         }
-        //訂單資訊
+        //订单信息
         $order = Order::find($request->order_id);
         if (!in_array($order->order_status, [Order::STATUS_UNPAID, Order::STATUS_PAY_FAILED]))
         {
@@ -217,21 +217,21 @@ class PaypalController extends Controller
         $cancel_url = config('app.url');
         $return_url = route('paypal.return');
         $notify_url = config('strongshop.payment.paypal.notify_url', route('paypal.notify'));
-        //收款賬號
+        //收款账号
         $business = $model->more['business'] ?? config('strongshop.payment.paypal.business');
-        //預設設定結算貨幣
+        //默认设置结算货币
         $defaultCurrencyPay = isset($model->more['currency']) || $model->more['currency'] == null ? $model->more['currency'] : config('strongshop.defaultCurrencyPay');
-        //環境
+        //环境
         $env = $model->more['env'] ?? config('strongshop.env');
 
-        $description = config('app.name'); //訂單描述
-        $currency = $order->currency_code; //訂單貨幣
-        $currency_rate = $order->currency_rate; //訂單貨幣費率
-        $invoiceNumber = $order->order_no; //訂單號
-        $total = $order->order_amount; //支付總額
+        $description = config('app.name'); //订单描述
+        $currency = $order->currency_code; //订单货币
+        $currency_rate = $order->currency_rate; //订单货币费率
+        $invoiceNumber = $order->order_no; //订单号
+        $total = $order->order_amount; //支付总额
 
         /*
-         * 如果`預設設定結算貨幣`和`訂單貨幣`不一致，則強制轉換為 `預設設定結算貨幣`
+         * 如果`默认设置结算货币`和`订单货币`不一致，则强制转换为 `默认设置结算货币`
          */
         if ($defaultCurrencyPay && $defaultCurrencyPay !== $currency)
         {
@@ -252,19 +252,19 @@ class PaypalController extends Controller
 
         $def_form = "<form action='{$url}' method='post'>";
         $def_form .= "<input type='hidden' name='cmd' value='_xclick'>" . // 不能省略
-                "<input type='hidden' name='business' value='{$business}'>" . // 貝寶帳號
+                "<input type='hidden' name='business' value='{$business}'>" . // 贝宝帐号
                 "<input type='hidden' name='item_name' value='{$description}'>" . // payment for
-                "<input type='hidden' name='amount' value='{$total}'>" . // 訂單金額
-                "<input type='hidden' name='currency_code' value='{$currency}'>" . // 貨幣
-                "<input type='hidden' name='return' value='{$return_url}'>" . // 付款后頁面
-                "<input type='hidden' name='invoice' value='{$invoiceNumber}'>" . // 訂單號
+                "<input type='hidden' name='amount' value='{$total}'>" . // 订单金额
+                "<input type='hidden' name='currency_code' value='{$currency}'>" . // 货币
+                "<input type='hidden' name='return' value='{$return_url}'>" . // 付款后页面
+                "<input type='hidden' name='invoice' value='{$invoiceNumber}'>" . // 订单号
                 "<input type='hidden' name='charset' value='utf-8'>" . // 字符集
-                "<input type='hidden' name='no_shipping' value='1'>" . // 不要求客戶提供收貨地址
-                "<input type='hidden' name='no_note' value=''>" . // 付款說明
+                "<input type='hidden' name='no_shipping' value='1'>" . // 不要求客户提供收货地址
+                "<input type='hidden' name='no_note' value=''>" . // 付款说明
                 "<input type='hidden' name='notify_url' value='{$notify_url}'>" .
                 "<input type='hidden' name='rm' value='2'>" .
                 "<input type='hidden' name='cancel_return' value='$cancel_url'>";
-        $def_form .= "<input type='submit' value='Pay With PayPal'>";                      // 按鈕
+        $def_form .= "<input type='submit' value='Pay With PayPal'>";                      // 按钮
         $def_form .= "</form>";
 
         return [
@@ -283,7 +283,7 @@ class PaypalController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //這個是重點。
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //这个是重点。
         $httpResponse = curl_exec($ch);
         if (!$httpResponse)
         {
@@ -307,9 +307,9 @@ class PaypalController extends Controller
     public function pay($orderId)
     {
         $clientId = config('strongshop.payment.paypal.clientId'); //ID
-        $clientSecret = config('strongshop.payment.paypal.clientSecret'); //秘鑰
+        $clientSecret = config('strongshop.payment.paypal.clientSecret'); //秘钥
         $return_url = route('paypal.callback'); //返回地址
-        //訂單資訊
+        //订单信息
         $order = Order::query()->where('id', $orderId)
                 ->with('orderProducts')
                 ->first();
@@ -325,7 +325,7 @@ class PaypalController extends Controller
 
         if (\App::environment(['production']))
         {
-            //如果是沙盒測試環境不設定，請註釋掉
+            //如果是沙盒测试环境不设置，请注释掉
             $apiContext->setConfig(
                     array(
                         'mode' => 'live',
@@ -333,22 +333,22 @@ class PaypalController extends Controller
             );
         }
 
-        $currency = $order->currency_code; //貨幣
-        $invoiceNumber = $order->order_no; //訂單號
-        $price = $order->products_amount; //產品金額
-        $shipping = $order->shipping_fee; //運費
-        $description = config('app.name'); //訂單描述
-        $total = $order->order_amount; //支付總額
+        $currency = $order->currency_code; //货币
+        $invoiceNumber = $order->order_no; //订单号
+        $price = $order->products_amount; //产品金额
+        $shipping = $order->shipping_fee; //运费
+        $description = config('app.name'); //订单描述
+        $total = $order->order_amount; //支付总额
 
         $address = new ShippingAddress();
-        $address->setRecipientName($order->first_name) //買家名
+        $address->setRecipientName($order->first_name) //买家名
                 ->setLine1($order->address_line_1)//地址
-                ->setLine2($order->address_line_2)//詳情地址
+                ->setLine2($order->address_line_2)//详情地址
                 ->setCity($order->city)//城市名
                 ->setState($order->state ?: $order->state_other)//省份
-                ->setPhone($order->phone)//手機號碼
-                ->setPostalCode($order->postal_code)//郵政編碼
-                ->setCountryCode($order->country_code); //國家編號
+                ->setPhone($order->phone)//手机号码
+                ->setPostalCode($order->postal_code)//邮政编码
+                ->setCountryCode($order->country_code); //国家编号
 
         $itemList = new ItemList();
         $itemList->setShippingAddress($address);
@@ -393,7 +393,7 @@ class PaypalController extends Controller
             return redirect('/');
         }
         $clientId = config('strongshop.payment.paypal.clientId'); //ID
-        $clientSecret = config('strongshop.payment.paypal.clientSecret'); //秘鑰
+        $clientSecret = config('strongshop.payment.paypal.clientSecret'); //秘钥
         $apiContext = new ApiContext(new OAuthTokenCredential($clientId, $clientSecret));
         $paymentId = $request->paymentId;
         $PayerID = $request->PayerID;
@@ -401,13 +401,13 @@ class PaypalController extends Controller
         $payment = Payment::get($paymentId, $apiContext);
         $execute = new PaymentExecution();
         $execute->setPayerId($PayerID);
-        $payment->execute($execute, $apiContext); //執行請求paypal支付資訊
+        $payment->execute($execute, $apiContext); //执行请求paypal支付信息
 
         $data = $payment->toArray();
-        $order_no = $data['transactions'][0]['invoice_number'] ?? ''; //訂單號
-        $transaction_id = $data['transactions'][0]['related_resources'][0]['sale']['id'] ?? ''; //交易流水號
-        $transaction_status = $data['transactions'][0]['related_resources'][0]['sale']['state'] ?? ''; //交易狀態
-        $paid_amount = $data['transactions'][0]['amount']['total'] ?? ''; //支付金額
+        $order_no = $data['transactions'][0]['invoice_number'] ?? ''; //订单号
+        $transaction_id = $data['transactions'][0]['related_resources'][0]['sale']['id'] ?? ''; //交易流水号
+        $transaction_status = $data['transactions'][0]['related_resources'][0]['sale']['state'] ?? ''; //交易状态
+        $paid_amount = $data['transactions'][0]['amount']['total'] ?? ''; //支付金额
         if ($payment->getState() === 'approved')
         {
             if ($transaction_status === 'completed')
@@ -416,11 +416,11 @@ class PaypalController extends Controller
                 OrderRepository::paid($order_no, $transaction_id, $paid_amount);
                 abort(200, __('Pay Success'));
             }
-            OrderRepository ::exception($order_no, '支付異常：' . $transaction_status); //當出現支付異常，請登錄paypal平臺檢視對應訂單狀態
+            OrderRepository ::exception($order_no, '支付异常：' . $transaction_status); //当出现支付异常，请登录paypal平台查看对应订单状态
             abort(201, __('Pay :status ...', ['status' => $transaction_status]));
         }
 
-        //支付失敗
+        //支付失败
         OrderRepository::failed($order_no);
         abort(201, __('Pay Failed'));
     }

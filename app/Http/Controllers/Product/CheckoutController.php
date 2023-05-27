@@ -42,7 +42,7 @@ class CheckoutController extends Controller
         }
         //支付方式
         $payment_options = PaymentOption::where('status', 1)->get();
-        //預設地址
+        //默认地址
         $default_address = UserAddress::where('user_id', $this->user->id)->where('is_default', 1)->first();
         if (!$default_address)
         {
@@ -59,13 +59,13 @@ class CheckoutController extends Controller
                 $default_address->email = $this->user->email;
             }
         }
-        //國家
+        //国家
         $countries = RegionRepository::countries();
         //省
         $states = $default_address->country_code ? RegionRepository::states($default_address->country_code) : [];
         //配送方式
         $shipping_options = ShippingRepository::getShippingFeeList($cart['cart_weight'], $default_address->country_code);
-        //本次訂單可使用積分額度
+        //本次订单可使用积分额度
         $use_credits_amount = intval($cart['total']['cart_total'] / 2);
         $viable_credits = CartRepository::getUsedCreditsByUseCreditsAmount($use_credits_amount);
         return view('shoppingcart.checkout', [
@@ -89,7 +89,7 @@ class CheckoutController extends Controller
         $rules = [
             'country_code' => ['required', 'string', 'max:255'],
             'state_code' => ['nullable', 'string', 'max:255'],
-            'buyNow' => ['nullable', 'in:0,1'], //是否是立即購買
+            'buyNow' => ['nullable', 'in:0,1'], //是否是立即购买
         ];
         $messages = [];
         $customAttributes = [];
@@ -120,7 +120,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * 訂單總計
+     * 订单总计
      */
     public function orderTotal(Request $request)
     {
@@ -129,7 +129,7 @@ class CheckoutController extends Controller
             'shipping_option_id' => ['required', 'integer', 'exists:shipping_option,id'],
             'payment_option_id' => ['required', 'integer', 'exists:payment_option,id'],
             'use_credits' => ['nullable', 'integer', 'gte:100'],
-            'buyNow' => ['nullable', 'in:0,1'], //是否是立即購買
+            'buyNow' => ['nullable', 'in:0,1'], //是否是立即购买
         ];
         $messages = [];
         $customAttributes = [];
@@ -141,7 +141,7 @@ class CheckoutController extends Controller
         $cart = CartRepository::getCart($request->buyNow);
         $order_total = CartRepository::getOrderTotal($request, $cart);
         $data = $order_total;
-        //訂單結算貨幣
+        //订单结算货币
         $data['order_total_defaultCurrencyPay'] = $data['order_total'];
         if (config('strongshop.defaultCurrencyPay') !== AppRepository::getCurrentCurrency())
         {
@@ -151,7 +151,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * 建立訂單
+     * 创建订单
      * @param Request $request
      * @return type
      */
@@ -162,7 +162,7 @@ class CheckoutController extends Controller
             return ['code' => 4003, 'message' => __('Your email address is not verified')];
         }
         $rules = [
-            'buyNow' => ['nullable', 'in:0,1'], //是否是立即購買
+            'buyNow' => ['nullable', 'in:0,1'], //是否是立即购买
             //配送地址
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -176,7 +176,7 @@ class CheckoutController extends Controller
             'address_line_1' => ['required', 'string', 'max:255'],
             'address_line_2' => ['nullable', 'string', 'max:255'],
             'postal_code' => ['required', 'string', 'max:255'],
-            //賬單地址
+            //账单地址
             'billing_first_name' => ['required', 'string', 'max:255'],
             'billing_last_name' => ['required', 'string', 'max:255'],
             'billing_email' => ['required', 'string', 'max:255'],
@@ -189,7 +189,7 @@ class CheckoutController extends Controller
             'billing_address_line_1' => ['required', 'string', 'max:255'],
             'billing_address_line_2' => ['nullable', 'string', 'max:255'],
             'billing_postal_code' => ['required', 'string', 'max:255'],
-            //積分
+            //积分
             'use_credits' => ['nullable', 'integer', 'gte:100', 'lte:' . $this->user->pay_credits],
             'shipping_option_id' => ['required', 'integer', Rule::exists('shipping_option_config', 'shipping_option_id')->where('status', 1)->where(function ($query)use ($request) {
                     return $query->whereJsonContains('countries', [$request->country_code]);
@@ -208,42 +208,42 @@ class CheckoutController extends Controller
             return ['code' => 3001, 'message' => $validator->errors()->first(), 'data' => $validator->errors()];
         }
         $order_data = $request->only(array_keys($rules));
-        //購物車資訊
+        //购物车信息
         $cart = CartRepository::getCart($request->buyNow);
         if (count($cart['rows']) < 1)
         {
             return ['code' => 4001, 'message' => __('Shopping Cart is empty.')];
         }
-        //本次訂單可使用積分額度
+        //本次订单可使用积分额度
         $use_credits_amount = intval($cart['total']['cart_total'] / 2);
         $viable_credits = CartRepository::getUsedCreditsByUseCreditsAmount($use_credits_amount);
         if ($request->use_credits > $viable_credits)
         {
             return ['code' => 4002, 'message' => __('The maximum credits for the order that you can use are <b>:viable_credits</b> credits.', ['viable_credits' => $viable_credits])];
         }
-        //目前選擇的貨幣
+        //当前选择的货币
         $currency_code = AppRepository::getCurrentCurrency();
-        //訂單合計
+        //订单合计
         $order_total = CartRepository::getOrderTotal($request, $cart);
-        //目前貨幣轉換率
+        //当前货币转换率
         $currency_rate = AppRepository::getCurrentCurrencyRate();
-        //產品金額
+        //产品金额
         $products_amount = $order_total['cart_total'];
-        //配送費用
+        //配送费用
         $shipping_fee = $order_total['shipping_fee'];
-        //支付手續費
+        //支付手续费
         $handling_fee = $order_total['handling_fee'];
-        //稅收費用
+        //税收费用
         $tax_fee = $order_total['tax_fee'];
-        //訂單金額，支付金額
+        //订单金额，支付金额
         $order_amount = $order_total['order_total'];
-        //使用積分金額
+        //使用积分金额
         $used_credits_amount = $order_total['used_credits_amount'];
-        //折扣金額
+        //折扣金额
         $discount_amount = 0;
 
         /**
-         * 產生訂單
+         * 生成订单
          */
         $orderModel = new Order();
         $orderModel->fill($order_data);
@@ -251,23 +251,23 @@ class CheckoutController extends Controller
         $orderModel->order_no = OrderRepository::generateOrderNo();
         $orderModel->currency_code = $currency_code;
         $orderModel->currency_rate = $currency_rate;
-        $orderModel->weight_total = $cart['cart_weight']; //產品總重
-        $orderModel->products_amount = $products_amount; //產品金額
-        $orderModel->shipping_fee = $shipping_fee; //配送費用
-        $orderModel->handling_fee = $handling_fee; //支付手續費
-        $orderModel->tax_fee = $tax_fee; //稅收費用
-        $orderModel->order_amount = $order_amount; //訂單金額，支付金額
+        $orderModel->weight_total = $cart['cart_weight']; //产品总重
+        $orderModel->products_amount = $products_amount; //产品金额
+        $orderModel->shipping_fee = $shipping_fee; //配送费用
+        $orderModel->handling_fee = $handling_fee; //支付手续费
+        $orderModel->tax_fee = $tax_fee; //税收费用
+        $orderModel->order_amount = $order_amount; //订单金额，支付金额
         $orderModel->paid_amount = 0;
-        $orderModel->used_credits_amount = $used_credits_amount; //積分金額
-        $orderModel->discount_amount = $discount_amount; //折扣金額
-        $orderModel->order_status = Order::STATUS_UNPAID; //訂單狀態
+        $orderModel->used_credits_amount = $used_credits_amount; //积分金额
+        $orderModel->discount_amount = $discount_amount; //折扣金额
+        $orderModel->order_status = Order::STATUS_UNPAID; //订单状态
         $orderModel->shipping_option_id = $request->shipping_option_id;
         $orderModel->payment_option_id = $request->payment_option_id;
         $orderModel->remark = (string) $request->remark;
 
         DB::transaction(function ()use ($orderModel, $cart, $request) {
             $orderModel->save();
-            //訂單產品
+            //订单产品
             foreach ($cart['rows'] as $cartRow)
             {
                 $specs = [];
@@ -295,11 +295,11 @@ class CheckoutController extends Controller
                 ];
             }
             DB::table('order_product')->insert($orderProducts);
-            //清空購物車
+            //清空购物车
             CartRepository::clearCart($request->buyNow);
         }, 2);
 
-        //觸發`下單成功`事件
+        //触发`下单成功`事件
         event(new CreatedOrder($orderModel));
 
         //支付方式

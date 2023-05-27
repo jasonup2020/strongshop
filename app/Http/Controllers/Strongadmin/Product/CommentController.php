@@ -244,7 +244,7 @@ class CommentController extends BaseController
         $model->save();
         return [
             'code' => 200,
-            'message' => __('審覈通過'),
+            'message' => __('审核通过'),
             'log' => sprintf('[%s][%s]『id:%s』', __('admin.SuccessDestroyed'), $productComment->tableComments, json_encode($request->id))
         ];
     }
@@ -263,7 +263,7 @@ class CommentController extends BaseController
         $model->save();
         return [
             'code' => 200,
-            'message' => __('審覈拒絕'),
+            'message' => __('审核拒绝'),
             'log' => sprintf('[%s][%s]『id:%s』', __('admin.SuccessDestroyed'), $productComment->tableComments, json_encode($request->id))
         ];
     }

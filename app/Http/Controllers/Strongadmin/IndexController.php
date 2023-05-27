@@ -33,22 +33,22 @@ class IndexController extends \OpenStrong\StrongAdmin\Http\Controllers\IndexCont
      */
     public function panel()
     {
-        $order_count_paid = Order::where('order_status', Order::STATUS_PAID)->count(); //待發貨
+        $order_count_paid = Order::where('order_status', Order::STATUS_PAID)->count(); //待发货
         $order_count_unpaid = Order::where('order_status', Order::STATUS_UNPAID)->count(); //待付款
-        $order_count_today = Order::whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])->count(); //今日訂單
-        $userfeedback_noreply_count = UserFeedback::where('parent_id', 0)->where('status', 1)->count(); //待回覆反饋
-        $product_stock_warning = Product::where('stock', '<=', 5)->count(); //產品庫存警告
-        //數據總計
+        $order_count_today = Order::whereBetween('created_at', [now()->startOfDay(), now()->endOfDay()])->count(); //今日订单
+        $userfeedback_noreply_count = UserFeedback::where('parent_id', 0)->where('status', 1)->count(); //待回复反馈
+        $product_stock_warning = Product::where('stock', '<=', 5)->count(); //产品库存警告
+        //数据总计
         $total = [
             'users' => User::count(),
             'products' => Product::count(),
             'orders' => Order::count(),
             'product_comments' => ProductComment::count(),
         ];
-        //環境和版本資訊
+        //环境和版本信息
         $version = [
-            'os' => php_uname('s') . ' ' . php_uname('r') . ' ' . php_uname('m'), //操作系統
-            'strongshop' => Strongshop::getVersion(), //strongshop 系統
+            'os' => php_uname('s') . ' ' . php_uname('r') . ' ' . php_uname('m'), //操作系统
+            'strongshop' => Strongshop::getVersion(), //strongshop 系统
             'php' => PHP_VERSION,
             'nginx' => $_SERVER['SERVER_SOFTWARE'] ?? '',
             'mysql' => DB::connection()->getPdo()->getAttribute(\PDO::ATTR_SERVER_VERSION),

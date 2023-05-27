@@ -26,7 +26,7 @@ class ProductController extends Controller
 {
 
     /**
-     * 產品 列表/搜索
+     * 产品 列表/搜索
      * @param Request $request
      * @return type
      */
@@ -85,7 +85,7 @@ class ProductController extends Controller
         }
         if ($request->keywords)
         {
-            //先查詢spu sku是否存在，如果不存在則進行全文檢索查詢
+            //先查询spu sku是否存在，如果不存在则进行全文检索查询
             $modelSku = clone $model;
             $modelSku->where(function ($query)use ($request) {
                 $query->orWhere('spu', $request->keywords);
@@ -123,7 +123,7 @@ class ProductController extends Controller
     /**
      * 搜索
      * 【配合 elasticsearch 使用】
-     * 使用此方法前確保模型 `App\Models\Product\Product` 使用 Trait `use \Laravel\Scout\Searchable;`
+     * 使用此方法前确保模型 `App\Models\Product\Product` 使用 Trait `use \Laravel\Scout\Searchable;`
      * @param Request $request
      * @return type
      */
@@ -156,7 +156,7 @@ class ProductController extends Controller
         {
             return $this->renderError(3002, __('The product has been removed'));
         }
-        //累加檢視次數
+        //累加查看次数
         $click_num_key = 'click_num_' . $request->id;
         if (!$request->cookie($click_num_key))
         {
@@ -166,12 +166,12 @@ class ProductController extends Controller
         }
         $product_specs = $row->specs->groupBy('spec_type');
 
-        //價格規格
+        //价格规格
         $price_sepcs = $product_specs->get(1) ?: [];
-        //普通規格
+        //普通规格
         $general_sepcs = $product_specs->get(2) ?: [];
 
-        //spu產品
+        //spu产品
         if ($row->spu)
         {
             $productsModel = Product::query();
@@ -186,9 +186,9 @@ class ProductController extends Controller
         {
             $spuProducts = [];
         }
-        //** begin 處理 spu 價格規格
-        $spu_specs = []; //相同 spu 的產品規格
-        $specs_exists_all = []; //相同 spu 有效的全部規格
+        //** begin 处理 spu 价格规格
+        $spu_specs = []; //相同 spu 的产品规格
+        $specs_exists_all = []; //相同 spu 有效的全部规格
         foreach ($spuProducts as $spuProduct)
         {
             if (empty($spuProduct['specs']))
@@ -200,20 +200,20 @@ class ProductController extends Controller
                 'sku' => $spuProduct['sku'],
                 'spec_values' => collect($spuProduct['specs'])->pluck('pivot.spec_value')->sort()->values()
             ];
-            //把產品圖片追加到該產品規格里
+            //把产品图片追加到该产品规格里
             $spuProduct['specs']->map(function ($item)use ($spuProduct) {
                 $item->product_img = $spuProduct->img_spec ?: $spuProduct->img_cover;
                 return $item;
             });
             $specs_exists_all = array_merge($specs_exists_all, $spuProduct['specs']->toArray());
         }
-        $group_spec = collect($specs_exists_all)->groupBy('id'); //按照規格id分組
+        $group_spec = collect($specs_exists_all)->groupBy('id'); //按照规格id分组
         foreach ($price_sepcs as $spec)
         {
             $group_spec_vals = $group_spec->get($spec['id']);
             $new_group_spec = [];
             $select_values_arr = explode("\n", $spec['select_values']);
-            //按照已設定的規格值順序排序
+            //按照已设定的规格值顺序排序
             foreach ($select_values_arr as $select_value)
             {
                 $res = $group_spec_vals->where('pivot.spec_value', $select_value);
@@ -224,12 +224,11 @@ class ProductController extends Controller
             }
             $spec['spu_specs'] = $new_group_spec;
         }
-
         $row->spu_specs = $spu_specs;
-        //** end 處理 spu 價格規格
-        //收藏狀態
+        //** end 处理 spu 价格规格
+        //收藏状态
         $row->is_collected = !$this->user ? 0 : (int) DB::table('user_collect')->where('product_id', $row->id)->where('user_id', $this->user->id)->exists();
-        //相關配件，附件
+        //相关配件，附件
         if ($row->related_accessories_sku)
         {
             $row->related_accessories_sku = Product::select('id', 'sku', 'title', 'sale_price', 'img_cover', 'wholesale_set')->whereIn('sku', explode(',', $row->related_accessories_sku))->get();
@@ -245,8 +244,8 @@ class ProductController extends Controller
         View::share('_meta_keywords', $row->meta_keywords);
         View::share('_meta_description', $row->meta_description ?: $row->intro);
 
-        $returns = Article::find(37); //退貨政策
-        $delivery = Article::find(40); //發貨政策
+        $returns = Article::find(37); //退货政策
+        $delivery = Article::find(40); //发货政策
 
         if ($request->fetchHtml)
         {

@@ -199,7 +199,7 @@ class SpecController extends BaseController
     public function destroy(Request $request, Spec $spec)
     {
         $validator = Validator::make($request->all(), [
-                    'id' => ['required', new NotExists('product_spec', 'spec_id', '該產品規格已被使用，無法刪除')],
+                    'id' => ['required', new NotExists('product_spec', 'spec_id', '该产品规格已被使用，无法删除')],
         ]);
         if ($validator->fails())
         {

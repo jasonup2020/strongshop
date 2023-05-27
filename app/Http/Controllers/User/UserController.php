@@ -32,7 +32,7 @@ class UserController extends Controller
         {
             return ['code' => 200, 'message' => __('Success'), 'data' => $user];
         }
-        //國家
+        //国家
         $countries = RegionRepository::countries();
         return view('user.account', ['user' => $user, 'countries' => $countries]);
     }

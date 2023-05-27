@@ -18,12 +18,12 @@ class PayondeliveryController extends Controller
 {
 
     /**
-     * [貨到付款] 支付頁面
+     * [货到付款] 支付页面
      */
     public function index(Request $request)
     {
         $orderId = $request->orderId;
-        //訂單資訊
+        //订单信息
         $order = Order::query()->where('id', $orderId)
                 ->with('orderProducts')
                 ->first();
@@ -43,18 +43,18 @@ class PayondeliveryController extends Controller
         }
 
         $cancel_url = route('home');
-        //收款賬號
+        //收款账号
         $business = $model->more['business'] ?? config('strongshop.payment.paypal.business');
-        //預設設定結算貨幣
+        //默认设置结算货币
         $defaultCurrencyPay = isset($model->more['currency']) || $model->more['currency'] == null ? $model->more['currency'] : config('strongshop.defaultCurrencyPay');
-        //環境
+        //环境
         $env = $model->more['env'] ?? config('strongshop.env');
 
-        $description = config('app.name'); //訂單描述
-        $currency = $order->currency_code; //訂單貨幣
-        $currency_rate = $order->currency_rate; //訂單貨幣費率
-        $invoiceNumber = $order->order_no; //訂單號
-        $total = $order->order_amount; //支付總額
+        $description = config('app.name'); //订单描述
+        $currency = $order->currency_code; //订单货币
+        $currency_rate = $order->currency_rate; //订单货币费率
+        $invoiceNumber = $order->order_no; //订单号
+        $total = $order->order_amount; //支付总额
 
         return view('payment.payondelivery', ['order' => $order, 'payment' => $model]);
     }

@@ -290,7 +290,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * 關閉訂單
+     * 关闭订单
      * @param Request $request
      * @param Order $order
      * @return type
@@ -310,12 +310,12 @@ class OrderController extends BaseController
         $model->canceled_at = now();
         if ($model->save())
         {
-            //觸發`訂單關閉`事件
+            //触发`订单关闭`事件
             event(new \App\Events\OrderClosed($model));
             return [
                 'code' => 200,
-                'message' => '成功關閉訂單',
-                'log' => sprintf('[%s][%s]『id:%s』『order_no:%s』', '成功關閉訂單', $order->tableComments, json_encode($ids), $order->order_no)
+                'message' => '成功关闭订单',
+                'log' => sprintf('[%s][%s]『id:%s』『order_no:%s』', '成功关闭订单', $order->tableComments, json_encode($ids), $order->order_no)
             ];
         } else
         {
@@ -324,7 +324,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * 確認付款
+     * 确认付款
      * @param Request $request
      * @param Order $order
      * @return type
@@ -348,8 +348,8 @@ class OrderController extends BaseController
             event(new \App\Events\OrderPaid($model));
             return [
                 'code' => 200,
-                'message' => '確認付款',
-                'log' => sprintf('[%s][%s]『id:%s』', '確認付款', $order->tableComments, json_encode($ids))
+                'message' => '确认付款',
+                'log' => sprintf('[%s][%s]『id:%s』', '确认付款', $order->tableComments, json_encode($ids))
             ];
         } else
         {
@@ -358,7 +358,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * 確認發貨
+     * 确认发货
      * @param Request $request
      * @param Order $order
      * @return type
@@ -388,13 +388,13 @@ class OrderController extends BaseController
         \Illuminate\Support\Facades\DB::beginTransaction();
         if ($model->save())
         {
-            //觸發`訂單發貨`事件
+            //触发`订单发货`事件
             event(new \App\Events\OrderShipped($model));
             \Illuminate\Support\Facades\DB::commit();
             return [
                 'code' => 200,
-                'message' => '確認發貨',
-                'log' => sprintf('[%s][%s]『id:%s』', '確認發貨', $order->tableComments, json_encode($ids))
+                'message' => '确认发货',
+                'log' => sprintf('[%s][%s]『id:%s』', '确认发货', $order->tableComments, json_encode($ids))
             ];
         } else
         {
@@ -404,7 +404,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * 確認退貨
+     * 确认退货
      * @param Request $request
      * @param Order $order
      * @return type
@@ -426,8 +426,8 @@ class OrderController extends BaseController
         {
             return [
                 'code' => 200,
-                'message' => '確認已退貨',
-                'log' => sprintf('[%s][%s]『id:%s』', '確認已退貨', $order->tableComments, json_encode($ids))
+                'message' => '确认已退货',
+                'log' => sprintf('[%s][%s]『id:%s』', '确认已退货', $order->tableComments, json_encode($ids))
             ];
         } else
         {
@@ -436,7 +436,7 @@ class OrderController extends BaseController
     }
 
     /**
-     * 確認完成
+     * 确认完成
      * @param Request $request
      * @param Order $order
      * @return type
@@ -458,8 +458,8 @@ class OrderController extends BaseController
         {
             return [
                 'code' => 200,
-                'message' => '確認完成',
-                'log' => sprintf('[%s][%s]『id:%s』', '確認完成', $order->tableComments, json_encode($ids))
+                'message' => '确认完成',
+                'log' => sprintf('[%s][%s]『id:%s』', '确认完成', $order->tableComments, json_encode($ids))
             ];
         } else
         {
@@ -528,9 +528,9 @@ class OrderController extends BaseController
         foreach ($rows as $row)
         {
             $str_pos = strpos($row->email, '@');
-            $str1 = substr($row->email, 0, $str_pos); // @前面的字元
+            $str1 = substr($row->email, 0, $str_pos); // @前面的字符
             $str1_len = strlen($str1);
-            $str2 = substr($row->email, $str_pos, 100); // @後面的字元
+            $str2 = substr($row->email, $str_pos, 100); // @后面的字符
             $str1_len_half1 = intval($str1_len / 2);
             $str1_len_half2 = $str1_len - $str1_len_half1;
             $str1_half_a = substr($str1, 0, $str1_len_half1);

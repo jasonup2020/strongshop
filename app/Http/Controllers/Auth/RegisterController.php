@@ -87,7 +87,7 @@ class RegisterController extends Controller
         $user->last_login_ip = $request->getClientIp();
         $user->save();
 
-        //觸發`註冊成功`事件
+        //触发`注册成功`事件
         event(new Registered($user));
 
         if ($this->isApi)
@@ -95,7 +95,7 @@ class RegisterController extends Controller
             return ['code' => 200, 'message' => 'Success'];
         }
 
-        //註冊成功后自動登錄
+        //注册成功后自动登录
         Auth::guard()->login($user, $request->remember);
 
         if (app('strongshop')->getShopConfig('notice_email_signed') && $user instanceof MustVerifyEmail && !$user->hasVerifiedEmail())
@@ -113,7 +113,7 @@ class RegisterController extends Controller
 
     public function captcha()
     {
-        return Captcha::create('flat'); //圖片驗證碼 
+        return Captcha::create('flat'); //图片验证码 
     }
 
 }
