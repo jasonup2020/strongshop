@@ -114,8 +114,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('status')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="顯示" @if($model->status==1)checked @endif>
-                    <input type="radio" name="status" value="2" title="隱藏" @if($model->status==2)checked @endif>
+                    <input type="radio" name="status" value="1" title="显示" @if($model->status==1)checked @endif>
+                    <input type="radio" name="status" value="2" title="隐藏" @if($model->status==2)checked @endif>
                     <div class="layui-word-aux st-form-tip"></div>
                 </div>
             </div>
@@ -168,16 +168,16 @@ $(function () {
         console.log(id);
         var lang = id.replace('wangEditorShow_', '');
         console.log(lang);
-        //富文字編輯
+        //富文本编辑
         const E = window.wangEditor;
         const editor = new E('#wangEditorShow_' + lang);
-        editor.config.uploadImgHeaders = {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')};//自定義header頭
-        editor.config.uploadImgServer = '/strongadmin/upload/image/wangeditor'; // 配置 server 介面地址
-        editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 2M 限制上傳大小
-        editor.config.uploadFileName = 'file';//上傳檔名
+        editor.config.uploadImgHeaders = {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')};//自定义header头
+        editor.config.uploadImgServer = '/strongadmin/upload/image/wangeditor'; // 配置 server 接口地址
+        editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 2M 限制上传大小
+        editor.config.uploadFileName = 'file';//上传文件名
         const $text1 = $('#LAY_ditor_' + lang);
         editor.config.onchange = function (html) {
-            // 第二步，監控變化，同步更新到 textarea
+            // 第二步，监控变化，同步更新到 textarea
             $text1.val(html);
         };
         editor.create();
@@ -190,10 +190,10 @@ $(function () {
     !function () {
         var form = layui.form, layedit = layui.layedit, laydate = layui.laydate;
 
-        //監聽提交
+        //监听提交
 //    layui.form.on('submit(ST-SUBMIT)', function (data) {
-//        var postDatas = data.field;//表單數據
-//        //提交json數據
+//        var postDatas = data.field;//表单数据
+//        //提交json数据
 //        var postDatas = JSON.stringify(postDatas);
         //        Util.postForm('#ST-FORM', postDatas, true, 'application/json;charset=utf-8');
 //        return false;

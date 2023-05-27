@@ -24,21 +24,21 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/userRank/create', this.innerText);">新增</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/userRank/destroy">刪除選中</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/userRank/create', this.innerText);">添加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/userRank/destroy">删除选中</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/userRank/update?id={{d.id}}', this.innerText);">更新</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/userRank/destroy?id={{d.id}}');">刪除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/userRank/destroy?id={{d.id}}');">删除</a>
     @endverbatim
 </script>
 @endsection
@@ -52,10 +52,10 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'name', title: '{{$model->getAttributeLabel("name")}}', width: 150, sort: true}
                 , {field: 'min_credits', title: '{{$model->getAttributeLabel("min_credits")}}', width: 150, sort: true}
                 , {field: 'max_credits', title: '{{$model->getAttributeLabel("max_credits")}}', width: 150, sort: true}

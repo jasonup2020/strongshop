@@ -98,21 +98,21 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/create', this.innerText);">新增</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/destroy">刪除選中</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/create', this.innerText);">添加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/destroy">删除选中</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/update?id={{d.id}}', this.innerText);">更新</a>
-    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/destroy?id={{d.id}}');">刪除</a>-->
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/destroy?id={{d.id}}');">删除</a>-->
     @endverbatim
 </script>
 @endsection
@@ -126,17 +126,17 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'email', title: '{{$model->getAttributeLabel("email")}}', width: 300, sort: true, templet: function (res) {
                         var html = '';
                         html += res.email + '<br/><br/>';
                         if(res.email_verified_at){
-                            html += '<span class="layui-badge layui-bg-green">已驗證</span>';
+                            html += '<span class="layui-badge layui-bg-green">已验证</span>';
                         }else{
-                            html += '<span class="layui-badge layui-bg-orange">未驗證</span>';
+                            html += '<span class="layui-badge layui-bg-orange">未验证</span>';
                         }
                         return html;
                     }}
@@ -167,7 +167,7 @@
                         if(res.mobile_verified_at){
                             return  res.mobile_verified_at;
                         }
-                        return '<span class="layui-badge layui-bg-orange">未驗證</span>';
+                        return '<span class="layui-badge layui-bg-orange">未验证</span>';
                     }}
                 , {field: 'gender', title: '{{$model->getAttributeLabel("gender")}}', width: 150, sort: true,templet:function(res){
                     return res.gender == 0 ? '保密' : (res.gender ==1? '男' : '女');
@@ -181,18 +181,18 @@
             ];
     var tableConfig = {
         cols: [cols]
-        ,limit: 20 //每頁條數
+        ,limit: 20 //每页条数
     };
     var tableIns = Util.renderTable(tableConfig);
-    //工具欄事件
+    //工具栏事件
     layui.table.on('toolbar(' + tableIns.config.id + ')', function (obj) {
         var checkStatus = layui.table.checkStatus(obj.config.id);
         switch (obj.event) {
-            //批量刪除
+            //批量删除
             case 'batchDelete':
                 Util.batchDelete($(this).attr('data-href'), checkStatus.data);
                 break;
-            //批量導出
+            //批量导出
             case 'ST-EXPORT-EXCEL':
                 var data = layui.form.val(tableIns.config.searchFormId);
                 Util.exportFile(tableIns, data);

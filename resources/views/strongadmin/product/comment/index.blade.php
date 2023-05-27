@@ -79,29 +79,29 @@ td div.layui-table-cell{
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/comment/create', this.innerText);">新增</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/product/comment/destroy">刪除選中</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/comment/create', this.innerText);">添加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/product/comment/destroy">删除选中</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
-    <!--<a class="layui-btn layui-btn-xs" href="/comment/show?id={{d.id}}&backend=abc" target="_blank">檢視</a>-->
-    <!--<a class="layui-btn layui-btn-xs" onclick="Util.createWindow('/admin/product/comment/show?id={{d.id}}', this.innerText);">檢視</a>-->
+    <!--<a class="layui-btn layui-btn-xs" href="/comment/show?id={{d.id}}&backend=abc" target="_blank">查看</a>-->
+    <!--<a class="layui-btn layui-btn-xs" onclick="Util.createWindow('/admin/product/comment/show?id={{d.id}}', this.innerText);">查看</a>-->
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/comment/update?id={{d.id}}', this.innerText);">更新</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/comment/destroy?id={{d.id}}');">刪除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/comment/destroy?id={{d.id}}');">删除</a>
     <hr/>
     {{#if (d.status==2 || d.status==3){ }}
-    <a class="layui-btn layui-btn-xs" onclick="st_approve('/strongadmin/product/comment/approve?id={{d.id}}');">審覈通過</a>
+    <a class="layui-btn layui-btn-xs" onclick="st_approve('/strongadmin/product/comment/approve?id={{d.id}}');">审核通过</a>
     {{# } }}
     {{#if (d.status==2){ }}
-    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="st_refused('/strongadmin/product/comment/refused?id={{d.id}}');">審覈拒絕</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="st_refused('/strongadmin/product/comment/refused?id={{d.id}}');">审核拒绝</a>
     {{# } }}
     @endverbatim
 </script>
@@ -159,10 +159,10 @@ td div.layui-table-cell{
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
 //                , {field: 'email', title: '{{$model->getAttributeLabel("email")}}', width: 150, sort: false, templet: function (res) {
 //                        return res.user.email;
 //                    }}
@@ -174,11 +174,11 @@ td div.layui-table-cell{
                 , {field: 'star', title: '{{$model->getAttributeLabel("star")}}', width: 90, sort: true}
                 , {field: 'status', title: '{{$model->getAttributeLabel("status")}}', width: 90, sort: true, templet: function (res) {
                         if(res.status==1){
-                            var html = '<span class="layui-badge layui-bg-green">審覈通過</span>';
+                            var html = '<span class="layui-badge layui-bg-green">审核通过</span>';
                         }else if(res.status ==2){
-                            var html = '<span class="layui-badge layui-bg-orange">待審覈</span>';
+                            var html = '<span class="layui-badge layui-bg-orange">待审核</span>';
                         }else{
-                            var html = '<span class="layui-badge">審覈拒絕</span>';
+                            var html = '<span class="layui-badge">审核拒绝</span>';
                         }
                         return html;
                     }}

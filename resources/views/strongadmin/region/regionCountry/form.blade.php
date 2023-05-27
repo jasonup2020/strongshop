@@ -64,14 +64,14 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">稅收</label>
+                <label class="layui-form-label">税收</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="more[tax_config][order_amount]" value="{{$model->more['tax_config']['order_amount'] ?? ''}}" autocomplete="off" placeholder="訂單金額" class="layui-input">
-                    <div class="layui-word-aux st-form-tip layui-show">訂單金額限制：當 >=訂單金額 才會觸發稅收。</div>
+                    <input type="text" name="more[tax_config][order_amount]" value="{{$model->more['tax_config']['order_amount'] ?? ''}}" autocomplete="off" placeholder="订单金额" class="layui-input">
+                    <div class="layui-word-aux st-form-tip layui-show">订单金额限制：当 >=订单金额 才会触发税收。</div>
                 </div>
                 <div class="layui-input-inline">
-                    <input type="text" name="more[tax_config][rate]" value="{{$model->more['tax_config']['rate'] ?? ''}}" autocomplete="off" placeholder="稅收比例" class="layui-input">
-                    <div class="layui-word-aux st-form-tip layui-show">稅收比例,百分比。例如：0.2，即20%；</div>
+                    <input type="text" name="more[tax_config][rate]" value="{{$model->more['tax_config']['rate'] ?? ''}}" autocomplete="off" placeholder="税收比例" class="layui-input">
+                    <div class="layui-word-aux st-form-tip layui-show">税收比例,百分比。例如：0.2，即20%；</div>
                 </div>
             </div>
         </div>

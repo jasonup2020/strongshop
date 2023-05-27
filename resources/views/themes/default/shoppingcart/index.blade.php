@@ -2,11 +2,11 @@
 
 @section('content')
 @include('layouts.includes.breadcrumb')
-<!--主體區域-->
+<!--主体区域-->
 <div class="st-cart">
     <div class="container">
         <div class="row">
-            <!--購物車-->
+            <!--购物车-->
             <div class="col-md-8">
                 <div class="page-header">
                     <h4>@lang('Shopping Cart') <button class="btn btn-default btn-xs pull-right" onclick="history.back();">@lang('Go back to add more')</button></h4>

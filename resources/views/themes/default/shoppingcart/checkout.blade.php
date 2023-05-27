@@ -2,7 +2,7 @@
 
 @section('content')
 @include('layouts.includes.breadcrumb')
-<!--主體區域-->
+<!--主体区域-->
 <div class="st-checkout">
     <form action="{{route('shoppingcart.createOrder')}}" method="post" id="ST-FORM">
         @csrf
@@ -227,7 +227,7 @@
                         @endif
                         <hr />
                         <p>
-                            <!--本地化語言翻譯 複數表達式 請參考鏈接：https://learnku.com/docs/laravel/6.x/localization/5148#pluralization -->
+                            <!--本地化语言翻译 复数表达式 请参考链接：https://learnku.com/docs/laravel/6.x/localization/5148#pluralization -->
                             <label>{{trans_choice('[0,1] Item total(:count item)|[2,99999]Item total(:count items)', $cart['total']['cart_qty_total'], ['count'=>$cart['total']['cart_qty_total']])}}:</label>
                             <font>{{$_current_currency_name}} {{$cart['total']['cart_total']}}</font>
                         </p>
@@ -270,9 +270,9 @@
 @push('scripts_bottom')
 <script>
     !function () {
-        //訂單總計
+        //订单总计
         Util.getOrderTotal();
-        //配送方式選擇
+        //配送方式选择
         var timerOrder;
         $(document).on('change keyup', "input[name=shipping_option_id],input[name=payment_option_id],input[name=use_credits]", function (e) {
             clearTimeout(timerOrder);
@@ -280,7 +280,7 @@
                 Util.getOrderTotal();
             }, 500);
         });
-        //賬單地址
+        //账单地址
         $("#billingThisAddress").click(function () {
             var checked = $(this).find('input').is(':checked');
             if (checked) {
@@ -289,13 +289,13 @@
                 $('.st-checkout-address-billing').removeClass('hidden').addClass('show');
             }
         });
-        //配送地區聯動
+        //配送地区联动
         $("select[name=country_code]").change(function () {
             var country_code = this.value;
             var buyNow = $("input[name=buyNow]").val();
-            //同步到賬單
+            //同步到账单
             $("select[name=billing_country_code]").val(this.value);
-            //獲取省
+            //获取省
             $.get('/common/region/states', {country_code: country_code}, function (res) {
                 var option_html = "<option value=''> -- {{__('State/Province')}} -- </option>";
                 $.each(res.data, function (i, item) {
@@ -304,7 +304,7 @@
                 $("select[name=state_code]").html(option_html);
                 $("select[name=billing_state_code]").html(option_html);
             });
-            //獲取配送方式
+            //获取配送方式
             $.get('/shoppingcart/shippingoptions', {country_code: country_code, buyNow: buyNow}, function (res) {
                 console.log(res);
                 $("#ST-SHIPPING_OPTIONS").html(res.content)
@@ -312,7 +312,7 @@
             });
 
         });
-        //賬單地區聯動
+        //账单地区联动
         $("select[name=billing_country_code]").change(function () {
             var country_code = this.value;
             $.get('/common/region/states', {country_code: country_code}, function (res) {

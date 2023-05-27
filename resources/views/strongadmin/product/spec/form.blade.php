@@ -27,7 +27,7 @@
                 </div>
                 @if(!isset($isUpdate))
                 <div class="layui-input-inline">
-                    <a class="layui-btn" onclick="Util.createFormWindow('/strongadmin/product/specGroup/create', this.innerText, ['60%', '60%']);">新建規格組</a>
+                    <a class="layui-btn" onclick="Util.createFormWindow('/strongadmin/product/specGroup/create', this.innerText, ['60%', '60%']);">新建规格组</a>
                 </div>
                 @endif
             </div>
@@ -63,32 +63,32 @@
             <div class="layui-form-item">
                 <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('spec_type')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="spec_type" value="1" title="價格規格" @if($model->spec_type==1)checked @endif  {{$isUpdate ? 'disabled' : ''}} lay-filter="spec_type" />
-                    <input type="radio" name="spec_type" value="2" title="普通規格" @if($model->spec_type==2)checked @endif  {{$isUpdate ? 'disabled' : ''}} lay-filter="spec_type" />
-                    <div class="layui-word-aux st-form-tip layui-show">價格規格：作為產品價格屬性選擇。普通規格：作為普通產品參數顯示</div>
+                    <input type="radio" name="spec_type" value="1" title="价格规格" @if($model->spec_type==1)checked @endif  {{$isUpdate ? 'disabled' : ''}} lay-filter="spec_type" />
+                    <input type="radio" name="spec_type" value="2" title="普通规格" @if($model->spec_type==2)checked @endif  {{$isUpdate ? 'disabled' : ''}} lay-filter="spec_type" />
+                    <div class="layui-word-aux st-form-tip layui-show">价格规格：作为产品价格属性选择。普通规格：作为普通产品参数显示</div>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('input_type')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="input_type" value="1" title="下拉選擇" @if($model->input_type==1)checked @endif @if($model->spec_type==1) disabled @endif lay-filter="input_type" />
-                    <input type="radio" name="input_type" value="2" title="文字輸入" @if($model->input_type==2)checked @endif @if($model->spec_type==1) disabled @endif lay-filter="input_type" />
-                    <div class="layui-word-aux st-form-tip layui-show">建立產品時產品規格的錄入方式</div>
+                    <input type="radio" name="input_type" value="1" title="下拉选择" @if($model->input_type==1)checked @endif @if($model->spec_type==1) disabled @endif lay-filter="input_type" />
+                    <input type="radio" name="input_type" value="2" title="文本输入" @if($model->input_type==2)checked @endif @if($model->spec_type==1) disabled @endif lay-filter="input_type" />
+                    <div class="layui-word-aux st-form-tip layui-show">创建产品时产品规格的录入方式</div>
                 </div>
             </div>
             <div class="layui-form-item" @if($model->input_type==2) style="display:none;" @endif >
                 <label class="layui-form-label"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('select_values')}}</label>
                 <div class="layui-input-block">
-                    <textarea name="select_values" autocomplete="off" placeholder="多個值回車換行" class="layui-textarea" >{{$model->select_values}}</textarea>
-                    <div class="layui-word-aux st-form-tip layui-show">當錄入方式為 下拉選擇 時有效。多個值回車換行</div>
+                    <textarea name="select_values" autocomplete="off" placeholder="多个值回车换行" class="layui-textarea" >{{$model->select_values}}</textarea>
+                    <div class="layui-word-aux st-form-tip layui-show">当录入方式为 下拉选择 时有效。多个值回车换行</div>
                 </div>
             </div>
             <div class="layui-form-item" @if($model->spec_type==2) style="display:none;" @endif >
                 <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('is_show_img')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="is_show_img" value="1" title="顯示" @if($model->is_show_img==1)checked @endif>
-                    <input type="radio" name="is_show_img" value="2" title="不顯示" @if($model->is_show_img==2)checked @endif>
-                    <div class="layui-word-aux st-form-tip layui-show">在產品詳情中進行規格選擇時是否以`圖片`形式顯示</div>
+                    <input type="radio" name="is_show_img" value="1" title="显示" @if($model->is_show_img==1)checked @endif>
+                    <input type="radio" name="is_show_img" value="2" title="不显示" @if($model->is_show_img==2)checked @endif>
+                    <div class="layui-word-aux st-form-tip layui-show">在产品详情中进行规格选择时是否以`图片`形式显示</div>
                 </div>
             </div>
         </div>

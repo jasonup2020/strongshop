@@ -17,11 +17,11 @@
     <input name="shipping_option_id" type="hidden" value="{{$model->shipping_option_id ?: request('shipping_option_id')}}" />
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class="layui-this">基礎配置</li>
-            <li>國家</li>
+            <li class="layui-this">基础配置</li>
+            <li>国家</li>
         </ul>
         <div class="layui-tab-content">
-            <!--基礎資訊-->
+            <!--基础信息-->
             <div class="layui-tab-item layui-show">
                 <div class="layui-form-item">
                     <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('title')}}</label>
@@ -33,7 +33,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('status')}}</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="status" value="1" title="啟用" @if($model->status==1)checked @endif>
+                        <input type="radio" name="status" value="1" title="启用" @if($model->status==1)checked @endif>
                         <input type="radio" name="status" value="2" title="禁用" @if($model->status==2)checked @endif>
                         <div class="layui-word-aux st-form-tip"></div>
                     </div>
@@ -45,22 +45,22 @@
                 @isset($model->more['range_wieght'])
                 @foreach($model->more['range_wieght'] as $wieght)
                 <fieldset class="layui-elem-field" style="margin-top: 30px;">
-                    <legend>公式{{$loop->iteration}} <a href="{{request()->fullUrlWithQuery(['removeRule'=>$loop->index])}}" class="layui-btn layui-btn-xs">刪除公式</a></legend>
+                    <legend>公式{{$loop->iteration}} <a href="{{request()->fullUrlWithQuery(['removeRule'=>$loop->index])}}" class="layui-btn layui-btn-xs">删除公式</a></legend>
                     <div class="layui-field-box">
                         <div class="layui-form-item">
-                            <label class="layui-form-label st-form-input-required">重量範圍（g）</label>
+                            <label class="layui-form-label st-form-input-required">重量范围（g）</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="more[range_wieght][{{$loop->index}}][range][start]" value="{{$wieght['range']['start']}}" {{$loop->index ==0 ? "readonly" : ""}} autocomplete="off" placeholder="起始值" class="layui-input">
                             </div>
                             <div class="layui-form-mid">-</div>
                             <div class="layui-input-inline">
-                                <input type="text" name="more[range_wieght][{{$loop->index}}][range][end]" value="{{$wieght['range']['end']}}" autocomplete="off" placeholder="結束值" class="layui-input">
+                                <input type="text" name="more[range_wieght][{{$loop->index}}][range][end]" value="{{$wieght['range']['end']}}" autocomplete="off" placeholder="结束值" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label st-form-input-required">首重($ / g)</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="more[range_wieght][{{$loop->index}}][first_weight][amount]" value="{{$wieght['first_weight']['amount']}}" autocomplete="off" placeholder="費用" class="layui-input">
+                                <input type="text" name="more[range_wieght][{{$loop->index}}][first_weight][amount]" value="{{$wieght['first_weight']['amount']}}" autocomplete="off" placeholder="费用" class="layui-input">
                             </div>
                             <div class="layui-form-mid">{{config('strongshop.defaultCurrencyBackend')}} / </div>
                             <div class="layui-input-inline">
@@ -69,9 +69,9 @@
                             <div class="layui-form-mid">克</div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label st-form-input-required">續重($ / g)</label>
+                            <label class="layui-form-label st-form-input-required">续重($ / g)</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="more[range_wieght][{{$loop->index}}][continued_weight][amount]" value="{{$wieght['continued_weight']['amount']}}" autocomplete="off" placeholder="費用" class="layui-input">
+                                <input type="text" name="more[range_wieght][{{$loop->index}}][continued_weight][amount]" value="{{$wieght['continued_weight']['amount']}}" autocomplete="off" placeholder="费用" class="layui-input">
                             </div>
                             <div class="layui-form-mid">{{config('strongshop.defaultCurrencyBackend')}} / </div>
                             <div class="layui-input-inline">
@@ -83,9 +83,9 @@
                 </fieldset>
                 @endforeach
                 <div class="layui-form-item">
-                    <label class="layui-form-label st-form-input-required">超出範圍($/g)</label>
+                    <label class="layui-form-label st-form-input-required">超出范围($/g)</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="more[over_weight][amount]" value="{{$model->more['over_weight']['amount']}}" autocomplete="off" placeholder="費用" class="layui-input">
+                        <input type="text" name="more[over_weight][amount]" value="{{$model->more['over_weight']['amount']}}" autocomplete="off" placeholder="费用" class="layui-input">
                     </div>
                     <div class="layui-form-mid">{{config('strongshop.defaultCurrencyBackend')}} / </div>
                     <div class="layui-input-inline">
@@ -95,7 +95,7 @@
                 </div>
                 @endisset
             </div>
-            <!--配置資訊-->
+            <!--配置信息-->
             <div class="layui-tab-item">
                 @foreach($countries as $country)
                 <span style="display: inline-block;width:300px;overflow: hidden;">

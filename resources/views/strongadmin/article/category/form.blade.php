@@ -18,7 +18,7 @@
                 <div class="layui-input-block">
                     @if($model->id && ($model->level==2 || $model->level==3))
                     <select name="parent_id" disabled="">
-                        <option value="">請選擇</option>
+                        <option value="">请选择</option>
                         @foreach ($menus as $menu)
                         <option value="{{$menu->id}}" @if($menu->id==$model->parent_id) selected @endif >{{$menu->name_label}}</option>
                         @endforeach
@@ -68,7 +68,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">{{$model->getAttributeLabel('status')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="開啟" @if($model->status==1)checked @endif>
+                    <input type="radio" name="status" value="1" title="开启" @if($model->status==1)checked @endif>
                     <input type="radio" name="status" value="2" title="禁用" @if($model->status==2)checked @endif>
                 </div>
             </div>

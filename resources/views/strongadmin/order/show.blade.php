@@ -27,7 +27,7 @@
 @section('content')
 <div class="st-h15"></div>
 <p>
-    <a class="layui-btn layui-btn-xs" href="/strongadmin/order/print?id={{$model->id}}" target="_blank">列印</a>
+    <a class="layui-btn layui-btn-xs" href="/strongadmin/order/print?id={{$model->id}}" target="_blank">打印</a>
 </p>
 <table class="layui-table" lay-size="sm">
     <colgroup>
@@ -38,7 +38,7 @@
     </colgroup>
     <thead>
         <tr>
-            <th colspan="4" style="text-align: center;background: #eee;">基本資訊</th>
+            <th colspan="4" style="text-align: center;background: #eee;">基本信息</th>
         </tr> 
     </thead>
     <tbody>
@@ -100,7 +100,7 @@
     </colgroup>
     <thead>
         <tr>
-            <th colspan="4" style="text-align: center;background: #eee;">收貨資訊</th>
+            <th colspan="4" style="text-align: center;background: #eee;">收货信息</th>
         </tr> 
     </thead>
     <tbody>
@@ -127,7 +127,7 @@
 <table class="layui-table" lay-size="sm">
     <thead>
         <tr>
-            <th colspan="14" style="text-align: center;background: #eee;">產品資訊</th>
+            <th colspan="14" style="text-align: center;background: #eee;">产品信息</th>
         </tr> 
     </thead>
     <thead>
@@ -189,7 +189,7 @@
     </colgroup>
     <thead>
         <tr>
-            <th colspan="4" style="text-align: center;background: #eee;">費用資訊</th>
+            <th colspan="4" style="text-align: center;background: #eee;">费用信息</th>
         </tr> 
     </thead>
     <tbody class="st-fee">

@@ -13,19 +13,19 @@
     <input name="id" type="hidden" value="{{$model->id}}" />
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li class="layui-this">基礎資訊</li>
-            <li>產品分類</li>
-            <li>產品價格</li>
-            <li>產品詳情</li>
-            <li>產品圖片</li>
-            <li>產品規格</li>
-            <li>相關產品</li>
-            <li>相關配件</li>
-            <li>SEO設定</li>
+            <li class="layui-this">基础信息</li>
+            <li>产品分类</li>
+            <li>产品价格</li>
+            <li>产品详情</li>
+            <li>产品图片</li>
+            <li>产品规格</li>
+            <li>相关产品</li>
+            <li>相关配件</li>
+            <li>SEO设置</li>
         </ul>
 
         <div class="layui-tab-content">
-            <!--基本資訊-->
+            <!--基本信息-->
             <div class="layui-tab-item layui-show">
                 <div class="layui-row">
                     <div class="layui-col-xs12">
@@ -90,12 +90,12 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('spu')}}</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="spu" value="{{$model->spu}}" autocomplete="off" placeholder="" class="layui-input" data-tips="商品聚合資訊的最小單位，如 手機->蘋果手機->蘋果6，蘋果6 就是SPU">
+                                <input type="text" name="spu" value="{{$model->spu}}" autocomplete="off" placeholder="" class="layui-input" data-tips="商品聚合信息的最小单位，如 手机->苹果手机->苹果6，苹果6 就是SPU">
                                 <div class="layui-word-aux st-form-tip"></div>
                             </div>
                             <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('sku')}}</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="sku" value="{{$model->sku}}" autocomplete="off" placeholder="" class="layui-input" data-tips="商品的不可再分的最小單元，如 土豪金 16G 蘋果6">
+                                <input type="text" name="sku" value="{{$model->sku}}" autocomplete="off" placeholder="" class="layui-input" data-tips="商品的不可再分的最小单元，如 土豪金 16G 苹果6">
                                 <div class="layui-word-aux st-form-tip"></div>
                             </div>
                             <label class="layui-form-label">{{$model->getAttributeLabel('brand_id')}}</label>
@@ -117,8 +117,8 @@
                             </div>
                             <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('stock_status')}}</label>
                             <div class="layui-input-inline">
-                                <input type="radio" name="stock_status" value="1" title="有庫存" @if($model->stock_status==1)checked @endif>
-                                <input type="radio" name="stock_status" value="2" title="無庫存" @if($model->stock_status==2)checked @endif>
+                                <input type="radio" name="stock_status" value="1" title="有库存" @if($model->stock_status==1)checked @endif>
+                                <input type="radio" name="stock_status" value="2" title="无库存" @if($model->stock_status==2)checked @endif>
                                 <div class="layui-word-aux st-form-tip"></div>
                             </div>
                         </div>
@@ -136,13 +136,13 @@
                             <div class="layui-input-inline">
                                 <input type="radio" name="status" value="1" title="上架" @if($model->status==1)checked @endif>
                                 <input type="radio" name="status" value="2" title="下架" @if($model->status==2)checked @endif>
-                                <div class="layui-word-aux st-form-tip">」下架「后，該產品無法購買</div>
+                                <div class="layui-word-aux st-form-tip">”下架“后，该产品无法购买</div>
                             </div>
                             <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('hidden')}}</label>
                             <div class="layui-input-inline">
                                 <input type="radio" name="hidden" value="1" title="是" @if($model->hidden==1)checked @endif>
                                 <input type="radio" name="hidden" value="2" title="否" @if($model->hidden==2)checked @endif>
-                                <div class="layui-word-aux st-form-tip">如果選擇」是「，則該產品不會顯示在產品搜索和分類列表中。但依然可在詳情頁顯示和進行購買</div>
+                                <div class="layui-word-aux st-form-tip">如果选择”是“，则该产品不会显示在产品搜索和分类列表中。但依然可在详情页显示和进行购买</div>
                             </div>
                         </div>
                         
@@ -192,14 +192,14 @@
                     </div>
                 </div>
             </div>
-            <!--產品分類-->
+            <!--产品分类-->
             <div class="layui-tab-item">
                 <div id="ST-TREE"></div>
             </div>
-            <!--產品價格-->
+            <!--产品价格-->
             <div class="layui-tab-item">
                 <fieldset class="layui-elem-field">
-                    <legend>基礎價格</legend>
+                    <legend>基础价格</legend>
                     <div class="layui-field-box">
                         <div class="layui-form-item">
                             <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('sale_price')}}</label>
@@ -229,8 +229,8 @@
                                 </colgroup>
                                 <thead>
                                     <tr>
-                                        <th>數量</th>
-                                        <th>價格</th>
+                                        <th>数量</th>
+                                        <th>价格</th>
                                         <th>操作</th>
                                     </tr> 
                                 </thead>
@@ -238,14 +238,14 @@
                                     <tr class="layui-hide">
                                         <td> ≥ <input type="text" name="wholesale_num" class="" /></td>
                                         <td><input type="text" name="wholesale_price" class="" /></td>
-                                        <td><a class="layui-btn layui-btn-xs st-wholesale-remove">刪除</a></td>
+                                        <td><a class="layui-btn layui-btn-xs st-wholesale-remove">删除</a></td>
                                     </tr>
                                     @isset($model->wholesale_set['num'])
                                     @foreach ($model->wholesale_set['num'] as $numVal)
                                     <tr>
                                         <td> ≥ <input type="text" name="wholesale_num" value="{{$numVal}}" /></td>
                                         <td><input type="text" name="wholesale_price"  value="{{$model->wholesale_set['price'][$loop->index]}}" /></td>
-                                        <td><a class="layui-btn layui-btn-xs st-wholesale-remove">刪除</a></td>
+                                        <td><a class="layui-btn layui-btn-xs st-wholesale-remove">删除</a></td>
                                     </tr>
                                     @endforeach
                                     @endisset
@@ -256,7 +256,7 @@
                     </div>
                 </fieldset>
             </div>
-            <!--產品詳情-->
+            <!--产品详情-->
             <div class="layui-tab-item">
                 @if($_multiLanguageBackend)
                 <div class="st-input-multiLanguage">
@@ -287,12 +287,12 @@
                 </div>
                 @endif
             </div>
-            <!--產品圖片-->
+            <!--产品图片-->
             <div class="layui-tab-item">
                 <div class="layui-row">
                     <div class="layui-upload-drag" id="ST-UPLOAD">
                         <i class="layui-icon"></i>
-                        <p>點選上傳產品圖，或將圖片拖拽到此處。( {{config('strongshop.productImage.uploadLimitMimes')}} ≤ {{config('strongshop.productImage.uploadLimitSize')}}kb )</p>
+                        <p>点击上传产品图，或将图片拖拽到此处。( {{config('strongshop.productImage.uploadLimitMimes')}} ≤ {{config('strongshop.productImage.uploadLimitSize')}}kb )</p>
                     </div>
                     <br/>
                     <br/>
@@ -305,10 +305,10 @@
                                             <img src="" data-title="" />
                                         </td>
                                         <td>
-                                            <label>作為封面圖 <input type="radio" name="isImgCover" value="1" lay-ignore /></label>
+                                            <label>作为封面图 <input type="radio" name="isImgCover" value="1" lay-ignore /></label>
                                         </td>
                                         <td>
-                                            <label>同時作為規格圖 <input type="radio" name="isImgSpec" value="1" lay-ignore /></label>
+                                            <label>同时作为规格图 <input type="radio" name="isImgSpec" value="1" lay-ignore /></label>
                                         </td>
                                         <td>
                                             <i class="layui-icon layui-icon-delete"></i>
@@ -328,10 +328,10 @@
                                             <img src="{{$img_photo['src']}}" data-title="{{$img_photo['title']}}" />
                                         </td>
                                         <td>
-                                            <label>作為封面圖 <input type="radio" name="isImgCover" value="1" lay-ignore @if(isset($img_photo['isImgCover']) && $img_photo['isImgCover']) checked @endif /></label>
+                                            <label>作为封面图 <input type="radio" name="isImgCover" value="1" lay-ignore @if(isset($img_photo['isImgCover']) && $img_photo['isImgCover']) checked @endif /></label>
                                         </td>
                                         <td>
-                                            <label>同時作為規格圖 <input type="radio" name="isImgSpec" value="1" lay-ignore @if(isset($img_photo['isImgSpec']) && $img_photo['isImgSpec']) checked @endif /></label>
+                                            <label>同时作为规格图 <input type="radio" name="isImgSpec" value="1" lay-ignore @if(isset($img_photo['isImgSpec']) && $img_photo['isImgSpec']) checked @endif /></label>
                                         </td>
                                         <td>
                                             <i class="layui-icon layui-icon-delete"></i>
@@ -349,13 +349,13 @@
                     </div>
                 </div>
             </div>
-            <!--產品規格-->
+            <!--产品规格-->
             <div class="layui-tab-item">
                 <div class="layui-form-item">
                     <label class="layui-form-label">{{$model->getAttributeLabel('spec_group_id')}}</label>
                     <div class="layui-input-inline">
                         <select name="spec_group_id" lay-filter="specGroup">
-                            <option value="">請選擇</option>
+                            <option value="">请选择</option>
                             @foreach ($specGroups as $specGroup)
                             <option value="{{$specGroup->id}}" @if($model->spec_group_id == $specGroup->id)selected @endif>{{$specGroup->name}}</option>
                             @endforeach
@@ -365,27 +365,27 @@
                 <hr>
                 <div id="productSpecsList"></div>
             </div>
-            <!--相關產品-->
+            <!--相关产品-->
             <div class="layui-tab-item">
                 <div class="layui-form-item">
                     <label class="layui-form-label">{{$model->getAttributeLabel('related_sku')}}</label>
                     <div class="layui-input-block">
-                        <input type="text" name="related_sku" value="{{$model->related_sku}}" autocomplete="off" placeholder="請填寫 sku， 多個 sku 請以英文標點 "," 分割" class="layui-input">
-                        <div class="layui-word-aux st-form-tip layui-show">請填寫 sku， 多個 sku 請以英文標點 "," 分割</div>
+                        <input type="text" name="related_sku" value="{{$model->related_sku}}" autocomplete="off" placeholder="请填写 sku， 多个 sku 请以英文标点 "," 分割" class="layui-input">
+                        <div class="layui-word-aux st-form-tip layui-show">请填写 sku， 多个 sku 请以英文标点 "," 分割</div>
                     </div>
                 </div>
             </div>
-            <!--相關配件-->
+            <!--相关配件-->
             <div class="layui-tab-item">
                 <div class="layui-form-item">
                     <label class="layui-form-label">{{$model->getAttributeLabel('related_accessories_sku')}}</label>
                     <div class="layui-input-block">
-                        <input type="text" name="related_accessories_sku" value="{{$model->related_accessories_sku}}" autocomplete="off" placeholder="請填寫 sku， 多個 sku 請以英文標點 "," 分割" class="layui-input">
-                        <div class="layui-word-aux st-form-tip layui-show">請填寫 sku， 多個 sku 請以英文標點 "," 分割</div>
+                        <input type="text" name="related_accessories_sku" value="{{$model->related_accessories_sku}}" autocomplete="off" placeholder="请填写 sku， 多个 sku 请以英文标点 "," 分割" class="layui-input">
+                        <div class="layui-word-aux st-form-tip layui-show">请填写 sku， 多个 sku 请以英文标点 "," 分割</div>
                     </div>
                 </div>
             </div>
-            <!--SEO設定-->
+            <!--SEO设置-->
             <div class="layui-tab-item layui-form-pane">
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">{{$model->getAttributeLabel('meta_keywords')}}</label>
@@ -423,16 +423,16 @@ $(function(){
         console.log(id);
         var lang = id.replace('wangEditorShow_', '');
         console.log(lang);
-        //富文字編輯
+        //富文本编辑
         const E = window.wangEditor;
         const editor = new E('#wangEditorShow_'+lang);
-        editor.config.uploadImgHeaders = {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')};//自定義header頭
-        editor.config.uploadImgServer = '/strongadmin/upload/image/wangeditor'; // 配置 server 介面地址
-        editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 2M 限制上傳大小
-        editor.config.uploadFileName = 'file';//上傳檔名
+        editor.config.uploadImgHeaders = {"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')};//自定义header头
+        editor.config.uploadImgServer = '/strongadmin/upload/image/wangeditor'; // 配置 server 接口地址
+        editor.config.uploadImgMaxSize = 2 * 1024 * 1024; // 2M 限制上传大小
+        editor.config.uploadFileName = 'file';//上传文件名
         const $text1 = $('#LAY_ditor_'+lang);
         editor.config.onchange = function (html) {
-            // 第二步，監控變化，同步更新到 textarea
+            // 第二步，监控变化，同步更新到 textarea
             $text1.val(html);
         };
         editor.create();
@@ -445,21 +445,21 @@ $(function(){
 !function () {
     var form = layui.form, layedit = layui.layedit, laydate = layui.laydate;
     
-    //動態渲染產品規格html部分
+    //动态渲染产品规格html部分
     Util.getSpecs('/strongadmin/product/spec/htmlString',$(":input[name='spec_group_id']").val(),{!!$model->id!!});
-    //產品規格組選擇事件監聽
+    //产品规格组选择事件监听
     form.on('select(specGroup)', function(data){
       Util.getSpecs('/strongadmin/product/spec/htmlString',data.value,{!!$model->id!!});
     });
         
-    //產品圖片上傳&排序
+    //产品图片上传&排序
     var sortImageId = '#ST-SORTABLE-IMAGE';
     Util.sortImage(sortImageId);
     layui.upload.render({
         elem: '#ST-UPLOAD'
-        , url: '/strongadmin/upload/image?thumb=1' //改成您自己的上傳介面
-        , size: 2000 //限制檔案大小，單位 KB
-        , multiple: true //多檔案上傳
+        , url: '/strongadmin/upload/image?thumb=1' //改成您自己的上传接口
+        , size: 2000 //限制文件大小，单位 KB
+        , multiple: true //多文件上传
         , done: function (res) {
             layer.closeAll();
             console.log(res);
@@ -467,71 +467,71 @@ $(function(){
                 layer.msg(res.message,function(){});
                 return;
             }
-            layer.msg('上傳成功');
+            layer.msg('上传成功');
             $(sortImageId + ">li:first").clone(true).appendTo(sortImageId).removeClass('layui-hide').find('img').attr({src: res.data.src, "data-title": res.data.title});
             Util.sortImageCover(sortImageId);
         }
     });
-    //產品分類樹
+    //产品分类树
     layui.tree.render({
         elem: '#ST-TREE'
         , data: {!!$categories!!}
-        , showCheckbox: true  //是否顯示覆選框
+        , showCheckbox: true  //是否显示复选框
         , id: 'ST-TREE'
-        //, isJump: true //是否允許點選節點時彈出新視窗跳轉
+        //, isJump: true //是否允许点击节点时弹出新窗口跳转
         , click: function (obj) {
-        //var data = obj.data;  //獲取目前點選的節點數據
-        //layer.msg('狀態：' + obj.state + '<br>節點數據：' + JSON.stringify(data));
+        //var data = obj.data;  //获取当前点击的节点数据
+        //layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
         }
     });
 
-    //監聽提交
+    //监听提交
     layui.form.on('submit(ST-SUBMIT)', function (data) {
-        var postDatas = data.field;//表單數據
+        var postDatas = data.field;//表单数据
         //console.log(postDatas);
-        //重組多語言欄位值
+        //重组多语言字段值
         for(postDataKey in postDatas)
         {
             var resMatch = postDataKey.match(/\[([\w-]+)\]$/);
             if(resMatch){
                 console.log(resMatch);
-                var newKey = postDataKey.replace(resMatch[0], '');//新欄位（鍵名）
-                var newChildKey = resMatch[1];//新欄位的多語言鍵名
-                //如果表單欄位有 newKey 欄位
+                var newKey = postDataKey.replace(resMatch[0], '');//新字段（键名）
+                var newChildKey = resMatch[1];//新字段的多语言键名
+                //如果表单字段有 newKey 字段
                 if(postDatas.hasOwnProperty(newKey)){
                     postDatas[newKey][newChildKey] = postDatas[postDataKey];
                 }else{
-                    //新欄位的多語言數據
+                    //新字段的多语言数据
                     var newChildData = {};
-                    newChildData[newChildKey] = postDatas[postDataKey];//多語言文字值
+                    newChildData[newChildKey] = postDatas[postDataKey];//多语言文本值
                     postDatas[newKey] = newChildData;
                 }
             }
         }
         //console.log(postDatas);
         
-        //產品分類數據
-        var checkedData = layui.tree.getChecked('ST-TREE'); //獲取選中節點的數據[產品分類]
+        //产品分类数据
+        var checkedData = layui.tree.getChecked('ST-TREE'); //获取选中节点的数据[产品分类]
         postDatas.categories = checkedData;
         
-        //批發配置
+        //批发配置
         var wholesale_set = Util.pluckWholesaleSet();
         postDatas.wholesale_set = wholesale_set;
         
-        //產品圖片
+        //产品图片
         var img_photos = Util.pluckImgPhotos();
-        postDatas.img_photos = img_photos;//產品相簿
-        postDatas.img_cover = $("input[name=isImgCover]:checked").parentsUntil('table').find('img').attr('src');//產品封面圖
-        postDatas.img_spec = $("input[name=isImgSpec]:checked").parentsUntil('table').find('img').attr('src');//產品規格圖
+        postDatas.img_photos = img_photos;//产品相册
+        postDatas.img_cover = $("input[name=isImgCover]:checked").parentsUntil('table').find('img').attr('src');//产品封面图
+        postDatas.img_spec = $("input[name=isImgSpec]:checked").parentsUntil('table').find('img').attr('src');//产品规格图
         
-        //產品規格
+        //产品规格
         postDatas.productSpecs = Util.pluckSpecs();
         
         //更多配置
         postDatas.more = {
             img_cover_show_inDetail:data.field.img_cover_show_inDetail
         };
-        //提交json數據
+        //提交json数据
         var postDatas = JSON.stringify(postDatas);
         Util.postForm('#ST-FORM', postDatas, true, 'application/json;charset=utf-8');
         return false;

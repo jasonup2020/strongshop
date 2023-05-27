@@ -44,20 +44,20 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/feedback/destroy">刪除選中</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/feedback/destroy">删除选中</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
-    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/feedback/update?id={{d.id}}', this.innerText, ['50%','85%'], false, ['確認回覆', '取消']);">回覆</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/feedback/destroy?id={{d.id}}');">刪除</a>
+    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/feedback/update?id={{d.id}}', this.innerText, ['50%','85%'], false, ['确认回复', '取消']);">回复</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/feedback/destroy?id={{d.id}}');">删除</a>
     @endverbatim
 </script>
 @endsection
@@ -71,10 +71,10 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'type', title: '{{$model->getAttributeLabel("type")}}', width: 150, sort: true,templet: function(res){
                         if(res.type ==1){
                             return 'Buy';
@@ -95,7 +95,7 @@
 //                }}
                 //, {field: 'more', title: '{{$model->getAttributeLabel("more")}}', width: 150, sort: true}
                 , {field: 'status', title: '{{$model->getAttributeLabel("status")}}', width: 150, sort: true,templet: function(res){
-                        return res.status ==1 ? '<span class="layui-badge">待回覆</span>' : '<span class="layui-badge layui-bg-green">已回覆</span>';
+                        return res.status ==1 ? '<span class="layui-badge">待回复</span>' : '<span class="layui-badge layui-bg-green">已回复</span>';
                 }}
                 , {field: 'created_at', title: '{{$model->getAttributeLabel("created_at")}}', width: 150, sort: true}
                 , {field: 'updated_at', title: '{{$model->getAttributeLabel("updated_at")}}', width: 150, sort: true}
@@ -105,8 +105,8 @@
     var tableConfig = {
         cols: [cols],
         initSort:{
-            field: 'status' //排序欄位，對應 cols 設定的各欄位名
-            , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 預設排序
+            field: 'status' //排序字段，对应 cols 设定的各字段名
+            , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
         }
     };
     Util.renderTable(tableConfig);

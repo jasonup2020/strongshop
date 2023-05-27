@@ -18,7 +18,7 @@
 <form class="layui-form st-form-search" action="" lay-filter="ST-FORM-SEARCH">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">產品分類</label>
+            <label class="layui-form-label">产品分类</label>
             <div class="layui-input-inline">
                 <select name="category_id">
                     <option value=""> -- </option>
@@ -53,7 +53,7 @@
             <label class="layui-form-label">{{$model->getAttributeLabel('status')}}</label>
             <div class="layui-input-inline">
                 <select name="status">
-                    <option value="">請選擇</option>
+                    <option value="">请选择</option>
                     <option value="1">上架</option>
                     <option value="2">下架</option>
                 </select>   
@@ -63,9 +63,9 @@
             <label class="layui-form-label">{{$model->getAttributeLabel('stock_status')}}</label>
             <div class="layui-input-inline">
                 <select name="stock_status">
-                    <option value="">請選擇</option>
-                    <option value="1">有庫存</option>
-                    <option value="2">無庫存</option>
+                    <option value="">请选择</option>
+                    <option value="1">有库存</option>
+                    <option value="2">无库存</option>
                 </select>   
             </div>
         </div> 
@@ -91,24 +91,24 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/create', this.innerText, ['70%', '80%'], true);">新增產品</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/product/destroy">刪除選中</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/create', this.innerText, ['70%', '80%'], true);">添加产品</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/product/destroy">删除选中</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
-    <a class="layui-btn layui-btn-xs" href="/product/?id={{d.id}}" target="_blank">檢視</a>
+    <a class="layui-btn layui-btn-xs" href="/product/?id={{d.id}}" target="_blank">查看</a>
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/update?id={{d.id}}', this.innerText, ['70%', '80%'], true);">更新</a>
     <hr/>
-    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/copy?id={{d.id}}', this.innerText, ['70%', '80%'], true);">複製</a>
-    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/destroy?id={{d.id}}');">刪除</a>-->
+    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/copy?id={{d.id}}', this.innerText, ['70%', '80%'], true);">复制</a>
+    <!--<a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/destroy?id={{d.id}}');">删除</a>-->
     @endverbatim
 </script>
 @endsection
@@ -122,15 +122,15 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 70, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 70, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'title', title: '{{$model->getAttributeLabel("title")}}',fixed: 'left', width: 260, sort: true, templet: function (res) {
                         var html = '';
                         html += res.title_label;
                         if(res.wholesale_set && res.wholesale_set.num.length>0){
-                            html += '<span class="layui-badge layui-bg-gray st-badge-wholesale">批發</span>';
+                            html += '<span class="layui-badge layui-bg-gray st-badge-wholesale">批发</span>';
                         }else{
                             
                         }
@@ -146,22 +146,22 @@
                 }}
                 , {field: 'status', title: '{{$model->getAttributeLabel("status")}}', width: 90, sort: true, templet: function (res) {
                         var html = res.status==1  ? '<span class="layui-badge layui-bg-green">上架</span>' : '<span class="layui-badge">下架</span>';
-                        html += res.hidden ==1 ? '<hr/><span class="layui-badge">強制隱藏</span>': '';
+                        html += res.hidden ==1 ? '<hr/><span class="layui-badge">强制隐藏</span>': '';
                         return html;
                     }}
                 , {field: 'is_hot', title: '{{$model->getAttributeLabel("is_hot")}}', width: 70, sort: true, templet: function (res) {
-                    return  res.is_hot==1  ? '<span class="layui-badge layui-bg-green">熱賣</span>' : '/';
+                    return  res.is_hot==1  ? '<span class="layui-badge layui-bg-green">热卖</span>' : '/';
                     }}
                 , {field: 'is_new', title: '{{$model->getAttributeLabel("is_new")}}', width: 70, sort: true, templet: function (res) {
                     return  res.is_new==1  ? '<span class="layui-badge layui-bg-green">新品</span>' : '/';
                     }}
                 , {field: 'is_recommend', title: '{{$model->getAttributeLabel("is_recommend")}}', width: 70, sort: true, templet: function (res) {
-                    return  res.is_recommend==1  ? '<span class="layui-badge layui-bg-green">推薦</span>' : '/';
+                    return  res.is_recommend==1  ? '<span class="layui-badge layui-bg-green">推荐</span>' : '/';
                     }}
                 , {field: 'sale_num', title: '{{$model->getAttributeLabel("sale_num")}}', width: 85, sort: true}
                 , {field: 'stock', title: '{{$model->getAttributeLabel("stock")}}', width: 70, sort: true}
                 , {field: 'stock_status', title: '{{$model->getAttributeLabel("stock_status")}}', width: 95, sort: true, templet: function (res) {
-                    return  res.stock_status==1  ? '<span class="layui-badge layui-bg-green">有庫存</span>' : '<span class="layui-badge">無庫存</span>';
+                    return  res.stock_status==1  ? '<span class="layui-badge layui-bg-green">有库存</span>' : '<span class="layui-badge">无库存</span>';
                     }}
                 , {field: 'click_num', title: '{{$model->getAttributeLabel("click_num")}}', width: 85, sort: true}
 //                , {field: 'hidden', title: '{{$model->getAttributeLabel("hidden")}}', width: 100, sort: true, templet: function (res) {

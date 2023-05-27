@@ -12,7 +12,7 @@
 <div class="st-h15"></div>
 <form class="layui-form" action="">
     <input name="id" type="hidden" value="{{$model->id}}" />
-    <!--基本資訊-->
+    <!--基本信息-->
     <div class="layui-tab-item layui-show">
         <div class="layui-row">
             <div class="layui-col-xs11">
@@ -32,7 +32,7 @@
                     <label class="layui-form-label"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('shipping_remark')}}</label>
                     <div class="layui-input-inline">
                         <input type="text" name="shipping_remark" value="{{$model->shipping_remark}}" autocomplete="off" placeholder="" class="layui-input">
-                        <div class="layui-word-aux st-form-tip">可填寫具體配送公司等資訊，此資訊在前臺訂單詳情顯示</div>
+                        <div class="layui-word-aux st-form-tip">可填写具体配送公司等信息，此信息在前台订单详情显示</div>
                     </div>
                 </div>
                 <div class="layui-form-item">

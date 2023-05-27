@@ -74,7 +74,7 @@
 
 @section('content')
 @include('layouts.includes.breadcrumb')
-<!--主體區域-->
+<!--主体区域-->
 <div class="container">
     <div class="st-checkout" style="min-height:500px;">
         <div class="st-h20"></div>

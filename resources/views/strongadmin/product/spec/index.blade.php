@@ -12,7 +12,7 @@
             <label class="layui-form-label">{{$model->getAttributeLabel('spec_group_id')}}</label>
             <div class="layui-input-inline">
                 <select name="spec_group_id">
-                    <option value="">請選擇</option>
+                    <option value="">请选择</option>
                     @foreach ($specGroups as $specGroup)
                     <option value="{{$specGroup->id}}" @if(request('spec_group_id') == $specGroup->id)selected @endif>{{$specGroup->name}}</option>
                     @endforeach
@@ -64,22 +64,22 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/spec/create?spec_group_id={{request("spec_group_id")}}', this.innerText);">新增規格</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/product/spec/destroy">刪除選中</a>
-        <a class="layui-btn layui-btn-xs" href="/strongadmin/product/specGroup/index">規格分組</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/spec/create?spec_group_id={{request("spec_group_id")}}', this.innerText);">添加规格</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/product/spec/destroy">删除选中</a>
+        <a class="layui-btn layui-btn-xs" href="/strongadmin/product/specGroup/index">规格分组</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/spec/update?id={{d.id}}', this.innerText);">更新</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/spec/destroy?id={{d.id}}');">刪除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/spec/destroy?id={{d.id}}');">删除</a>
     @endverbatim
 </script>
 @endsection
@@ -93,26 +93,26 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'spec_group_id', title: '{{$model->getAttributeLabel("spec_group_id")}}', width: 150, sort: true,templet: function (res) {
                     return  res.spec_group.name;
                     }}
                 , {field: 'name_label', title: '{{$model->getAttributeLabel("name")}}', width: 150, sort: true}
                 , {field: 'spec_type', title: '{{$model->getAttributeLabel("spec_type")}}', width: 150, sort: true,templet: function (res) {
-                    return  res.spec_type == 1 ? '價格規格' : '普通規格';
+                    return  res.spec_type == 1 ? '价格规格' : '普通规格';
                     }}
                 , {field: 'input_type', title: '{{$model->getAttributeLabel("input_type")}}', width: 150, sort: true,templet: function (res) {
-                    return  res.spec_type == 1 ? '下拉選擇' : '文字輸入';
+                    return  res.spec_type == 1 ? '下拉选择' : '文本输入';
                     }}
                 , {field: 'select_values', title: '{{$model->getAttributeLabel("select_values")}}', width: 350, sort: true}
                 , {field: 'created_at', title: '{{$model->getAttributeLabel("created_at")}}', width: 150, sort: true}
                 , {field: 'updated_at', title: '{{$model->getAttributeLabel("updated_at")}}', width: 150, sort: true}
                 , {fixed: 'right', title: '操作', toolbar: '#ST-OP-BUTTON', width: 150}
             ];
-    //查詢條件
+    //查询条件
     var spec_group_id = '{!!request('spec_group_id')!!}';
     var tableConfig = {
         cols: [cols]

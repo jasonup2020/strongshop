@@ -38,8 +38,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('status')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="正常發送" @if($model->status==1)checked @endif>
-                    <input type="radio" name="status" value="2" title="取消發送" @if($model->status==2)checked @endif>
+                    <input type="radio" name="status" value="1" title="正常发送" @if($model->status==1)checked @endif>
+                    <input type="radio" name="status" value="2" title="取消发送" @if($model->status==2)checked @endif>
                     <div class="layui-word-aux st-form-tip"></div>
                 </div>
             </div>

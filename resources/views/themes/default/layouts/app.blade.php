@@ -15,15 +15,15 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{env('APP_VERSION')}}">
-        <!-- Scripts 相容 ie8 自適應 -->
+        <!-- Scripts 兼容 ie8 自适应 -->
         <script src="{{ asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
-        <!--統計程式碼-->
+        <!--统计代码-->
         {!!app('strongshop')->getShopConfig('statistical_code')!!}
         @stack('styles')
         @stack('scripts')
     </head>
     <body id="app" class="st">
-        <!--頂部-提示資訊-->
+        <!--顶部-提示信息-->
         <div class="st-navtip">
             @if(!isset($_COOKIE['strongshop_browserOutdated']))
             <!--[if lte IE 8]>
@@ -44,7 +44,7 @@
             </div>
             @endif
         </div>
-        <!--導航區域-頂部 * 移動端隱藏-->
+        <!--导航区域-顶部 * 移动端隐藏-->
         <div class="st-navtop hidden-xs">
             <div class="container">
                 <ul class="nav nav-pills pull-left st-navtop-items">
@@ -143,7 +143,7 @@
                 </ul>
             </div>
         </div>
-        <!--導航區域-品牌、搜索和購物車 * 移動端隱藏-->
+        <!--导航区域-品牌、搜索和购物车 * 移动端隐藏-->
         <div class="st-navbrand hidden-xs">
             <div class="container">
                 <div class="row">
@@ -171,7 +171,7 @@
                             <span class="badge st-cartnum">@if($_cart['total']['cart_qty_total']>99) 99+ @else {{$_cart['total']['cart_qty_total']}} @endif</span>
                         </div>
                         @if(!request()->route()->named(['shoppingcart', 'shoppingcart.checkout']))
-                        <!--導航區域-購物車-->
+                        <!--导航区域-购物车-->
                         <div id="ST-NAVCART-PRODUCTS">
                             <div class="page-header st-navbrand-cart-total">
                                 @include('layouts.includes.shoppingcartBtn')
@@ -185,14 +185,14 @@
                 </div>
             </div>
         </div>
-        <!--導航區域-菜單 * 移動端隱藏-->
+        <!--导航区域-菜单 * 移动端隐藏-->
         <div class="st-navmenu hidden-xs">
             <div class="container">
                 <ul class="nav nav-pills">
                     <li id="products">
                         <a href="{{route('product.list')}}">@lang('Product Categories')</a>
                         <div class="st-allcat panel panel-default">
-                            <!-- List 一級分類 -->
+                            <!-- List 一级分类 -->
                             <ul class="list-group st-allcat-items">
                                 @foreach($_categories as $category)
                                 <li class="list-group-item">
@@ -208,10 +208,10 @@
                                 <div class="st-allcat-content-item">
                                     @foreach($category->children as $child)
                                     <dl>
-                                        <!--二級分類-->
+                                        <!--二级分类-->
                                         <dt><a href="{{route('product.list.rewrite', ['catid'=>$child->id])}}">{{$child['name']}}</a></dt>
                                         @foreach($child['children'] as $childChild)
-                                        <!--三級分類-->
+                                        <!--三级分类-->
                                         <dd><a href="{{route('product.list.rewrite', ['catid'=>$childChild->id])}}">{{$childChild['name']}}</a></dd>
                                         @endforeach
                                     </dl>
@@ -229,7 +229,7 @@
                 </ul>
             </div>
         </div>
-        <!-- 頭部導航 * 移動端顯示 -->
+        <!-- 头部导航 * 移动端显示 -->
         <nav class="navbar navbar-default st-header visible-xs-block">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -266,17 +266,17 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">@lang('Product Categories')<span class="caret"></span></a>
                             <ul class="dropdown-menu open st-cat">
-                                <!--一級分類-->
+                                <!--一级分类-->
                                 @foreach($_categories as $category)
                                 <li class="dropdown">
                                     <a href="{{route('product.list.rewrite', ['catid'=>$category->id])}}">{{$category->name}}</a>
                                     <ul class="dropdown-menu show st-subcat">
-                                        <!--二級分類-->
+                                        <!--二级分类-->
                                         @foreach($category->children as $child)
                                         <li class="dropdown">
                                             <a href="{{route('product.list.rewrite', ['catid'=>$child->id])}}">{{$child->name}}</a>
                                             <ul class="dropdown-menu show st-subsubcat">
-                                                <!--三級分類-->
+                                                <!--三级分类-->
                                                 @foreach($child['children'] as $childChild)
                                                 <li><a href="{{route('product.list.rewrite', ['catid'=>$childChild->id])}}">{{$childChild->name}}</a></li>
                                                 @endforeach
@@ -358,7 +358,7 @@
                         <p id="google_translate_element" class="pull-right"></p>
                     </div>
                 </div>-->
-        <!--底部資訊-->
+        <!--底部信息-->
         <div class="st-footer">
             <div class="st-footer-service">
                 <div class="container">
@@ -410,13 +410,13 @@
                     </div>
                 </div>
             </div>
-            <!--備案資訊-->
+            <!--备案信息-->
             <div class="st-footer-beian">
                 <div class="container">
                     &copy; {{date('Y')}} {{config('app.name')}} Copyright, All Rights Reserved. Powered By <a target="_blank" href="http://www.strongshop.cn">strongshop</a>
                 </div>
                 <div class="container">
-                    <a href="http://www.beian.gov.cn/" target="_blank">ICP備232142613號-1</a>
+                    <a href="http://www.beian.gov.cn/" target="_blank">ICP备232142613号-1</a>
                 </div>
             </div>
             <div class="st-h10"></div>
@@ -440,15 +440,15 @@
         <script>
 //js 初始化
             Util.init();
-//產品分類菜單
+//产品分类菜单
             Util.allCategories();
-//頂部全域性通知手動關閉后不再顯示
+//顶部全局通知手动关闭后不再显示
             Util.navNotice();
-//導航區域-購物車(顯隱)
+//导航区域-购物车(显隐)
             Util.navCart();
         </script>
         @if(empty($_languages))
-        <!--谷歌翻譯-->
+        <!--谷歌翻译-->
         <script>
             function googleTranslateElementInit() {
                 new google.translate.TranslateElement({

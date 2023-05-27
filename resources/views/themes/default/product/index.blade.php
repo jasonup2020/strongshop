@@ -6,22 +6,22 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <!--主體左側-->
+                <!--主体左侧-->
                 <div class="st-main-left hidden-xs">
-                    <!--篩選-產品分類-->
+                    <!--筛选-产品分类-->
                     <div class="st-main-left-category">
                         <!--<h5>@lang('Categories')</h5>-->
                         @foreach($categories as $category)
                         <dl>
-                            <!-- List 一級分類 -->
+                            <!-- List 一级分类 -->
                             <dt @if(request('catid')==$category->id)class="active" @endif><a href="{{route('product.list.rewrite', ['catid'=>$category->id])}}">{{$category->name}}</a></dt>
                             @foreach($category->children as $child)
                             <dd>
                                 <dl>
-                                    <!--二級分類-->
+                                    <!--二级分类-->
                                     <dt @if(request('catid')==$child['id'])class="active" @endif><a href="{{route('product.list.rewrite', ['catid'=>$child['id']])}}">{{$child['name']}}</a></dt>
                                     @foreach($child['children'] as $childChild)
-                                    <!--三級分類-->
+                                    <!--三级分类-->
                                     <dd @if(request('catid')==$childChild['id'])class="active" @endif><a href="{{route('product.list.rewrite', ['catid'=>$childChild['id']])}}">{{$childChild['name']}}</a></dd>
                                     @endforeach
                                 </dl>
@@ -30,7 +30,7 @@
                         </dl>
                         @endforeach
                     </div>
-                    <!--篩選-價格-->
+                    <!--筛选-价格-->
                     <div class="st-main-left-price">
                         <h5>@lang('Price')</h5>
                         @foreach($filterPrices as $filterPrice)
@@ -52,7 +52,7 @@
                         @endforeach
 
                     </div>
-                    <!--篩選-庫存狀態-->
+                    <!--筛选-库存状态-->
                     <div class="st-main-left-stock">
                         <h5>@lang('Stock Status')</h5>
                         <div class="checkbox">
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-sm-9">
-                <!--主體右側-->
+                <!--主体右侧-->
                 <div class="st-main-right st-main-product">
                     <div class="st-main-product-header">
                         <!--排序-->
@@ -83,19 +83,19 @@
                                 <option value="4" @if(request('sortBy')==4)selected @endif>@lang('Best Selling')</option>
                             </select>
                         </div>
-                        <!--移動端*隱藏-->
+                        <!--移动端*隐藏-->
                         <div class="st-main-product-header-pager pull-right hidden-xs">
-                            <!--分頁-->
+                            <!--分页-->
                             <nav aria-label="Page navigation">
                                 {{$rows->links()}}
                             </nav>
                         </div>
-                        <!--移動端*顯示-->
+                        <!--移动端*显示-->
                         <div class="st-main-product-header-filter pull-right visible-xs-block">
                             <span>@lang('Filter')</span>
                             <div id="FILTER">
                                 <span class="bi-x-square st-close"></span>
-                                <!--篩選-價格-->
+                                <!--筛选-价格-->
                                 <div class="st-main-product-header-filter-price">
                                     <h5>@lang('Price')</h5>
                                     @foreach($filterPrices as $filterPrice)
@@ -116,7 +116,7 @@
                                     @endif
                                     @endforeach
                                 </div>
-                                <!--篩選-庫存狀態-->
+                                <!--筛选-库存状态-->
                                 <div class="st-main-product-header-filter-stock">
                                     <h5>@lang('Stock Status')</h5>
                                     <div class="checkbox">
@@ -134,7 +134,7 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <!--產品列表-->
+                    <!--产品列表-->
                     <div class="row">
                         @foreach($rows as $row)
                         <div class="col-xs-6 col-sm-4 col-md-3">
@@ -154,7 +154,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <!--分頁-->
+                    <!--分页-->
                     <nav aria-label="Page navigation">
                         {{$rows->links()}}
                     </nav>
@@ -173,11 +173,11 @@
             var val = $(this).val();
             window.location.href = Util.setUrlParam(window.location.href, 'sortBy', val);
         });
-        //移動端*篩選
+        //移动端*筛选
         $(".st-main-product-header-filter").click(function () {
             $("#FILTER").slideDown('fast');
         });
-        //移動端*關閉篩選
+        //移动端*关闭筛选
         $("#FILTER .st-close").click(function (event) {
             $("#FILTER").slideUp('fast');
             event.stopPropagation();

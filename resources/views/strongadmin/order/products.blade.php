@@ -38,14 +38,14 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <!--<a class="layui-btn layui-btn-xs" onclick="history.back();">返回到訂單列表</a>-->
+        <!--<a class="layui-btn layui-btn-xs" onclick="history.back();">返回到订单列表</a>-->
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
@@ -63,9 +63,9 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
-                {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'title', title: '{{$model->getAttributeLabel("title")}}', width: 260, sort: true}
                 , {field: 'sku', title: '{{$model->getAttributeLabel("sku")}}', width: 200, sort: true}
                 , {field: 'img_cover', title: '{{$model->getAttributeLabel("img_cover")}}', width: 150, sort: true, templet: function (res) {

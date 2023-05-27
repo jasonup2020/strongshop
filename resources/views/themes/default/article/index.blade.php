@@ -30,7 +30,7 @@
                     </div>
                     @endforeach
                 </div>
-                <!--分頁-->
+                <!--分页-->
                 <nav aria-label="Page navigation">
                     {{$rows->links()}}
                 </nav>

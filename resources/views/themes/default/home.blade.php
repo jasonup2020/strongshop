@@ -13,7 +13,7 @@
 </style>
 @endpush
 @section('content')
-<!-- Banner 輪播圖-->
+<!-- Banner 轮播图-->
 <div class="st-banner">
     <div class="container">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -38,14 +38,14 @@
         <div class="jumbotron">
             <h1>About {{config('strongshop.storeName')}}</h1>
             <p>
-                開源免費的跨境電商網站。
+                开源免费的跨境电商网站。
             </p>
             <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more</a></p>
         </div>
     </div>
 </div>
 <div class="st-home-product">
-    <!--推薦產品-->
+    <!--推荐产品-->
     @if($recommendRows->isNotEmpty())
     <div class="container">
         <div class="page-header">
@@ -93,7 +93,7 @@
         </div>
     </div>
     @endif
-    <!--熱賣-->
+    <!--热卖-->
     @if($hotRows->isNotEmpty())
     <div class="container">
         <div class="page-header">

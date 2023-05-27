@@ -1,4 +1,4 @@
-<!--錯誤資訊-->
+<!--错误信息-->
 <div id="st-alert">
     <div class="container st-form-alert" style="display: none;">
         <div class="alert alert-dismissible fade in" role="alert">

@@ -1,4 +1,4 @@
-<!--路徑導航 * 移動端隱藏-->
+<!--路径导航 * 移动端隐藏-->
 <!--<div class="st-breadcrumb hidden-xs">
     <div class="container">
         <ol class="breadcrumb">

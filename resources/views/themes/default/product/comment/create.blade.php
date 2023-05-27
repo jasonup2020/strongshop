@@ -107,7 +107,7 @@
 
 @section('content')
 @include('layouts.includes.breadcrumb')
-<!--主體區域-->
+<!--主体区域-->
 <div class="st-main">
     <div class="container">
         <div class="st-work" id="app2" v-cloak>
@@ -162,32 +162,32 @@ new Vue({
     delimiters: ['${', '}'],
     data: {
         message: 'Hello Vue.js!',
-        //產品資訊
+        //产品信息
         work: {
-            //關聯的產品資訊
+            //关联的产品信息
             productData: {
                 id: "",
                 sku: "",
                 title: "",
                 img_cover: ""
             }
-            , product: {}//產品關聯的產品
-            , content: ""//產品描述內容
+            , product: {}//产品关联的产品
+            , content: ""//产品描述内容
             , star:5
         },
-        //關聯產品搜索
+        //关联产品搜索
         searchInput: {
             errorClass: '',
             errorMessage: ""
         },
-        //排序數據
+        //排序数据
         sortDatas: {
             start: null //更新前的位置
         }
     },
     methods: {
         /**
-         * 搜索產品
+         * 搜索产品
          * @returns {undefined}
          */
         searchProduct() {
@@ -214,7 +214,7 @@ new Vue({
             });
         },
         /**
-         * 提交產品
+         * 提交产品
          * @returns {undefined}
          */
         submitWork() {
@@ -245,22 +245,22 @@ new Vue({
             });
         },
         /**
-         * 產品圖片拖拽排序
+         * 产品图片拖拽排序
          * @param {type} id 容器
          * @returns {undefined}
          */
         sortable(id) {
             var _this = this;
             var options = {
-                placeholder: "ui-state-highlight"//拖拽后佔位
+                placeholder: "ui-state-highlight"//拖拽后占位
                 , opacity: 0.8//透明度
-                        //start這個動作在所有動作之前(我觀察到的所有動作之前)
+                        //start这个动作在所有动作之前(我观察到的所有动作之前)
                 , start: function (event, ui) {
                     var ind = ui.item.index();
                     console.log('start ui.item.index()', ind);
                     _this.sortDatas.start = ind;
                 }
-                //位置改變了才會啟用  介於receive和deactivate之間
+                //位置改变了才会激活  介于receive和deactivate之间
                 , update: function (event, ui) {
                     var updatedInd = ui.item.index();
                     var arr = _this.work.pictures;
@@ -282,7 +282,7 @@ new Vue({
             $(id).disableSelection();
         },
         /**
-         * 陣列元素交換位置
+         * 数组元素交换位置
          * @param {type} arr
          * @param {type} index1
          * @param {type} index2
@@ -304,7 +304,7 @@ new Vue({
             if (index > 0) {
                 return this.swapArray(arr, index, index - 1);
             } else {
-                console.log('已經處於置頂，無法上移');
+                console.log('已经处于置顶，无法上移');
             }
             return arr;
         },
@@ -319,15 +319,15 @@ new Vue({
             if ((index + 1) < arr.length) {
                 return this.swapArray(arr, index, index + 1);
             } else {
-                console.log('已經處於置底，無法下移');
+                console.log('已经处于置底，无法下移');
             }
             return arr;
         }
     },
     created: function () {
-        //關聯的產品sku
+        //关联的产品sku
         var sku = '{{request("sku")}}';
-        //作品關聯的產品
+        //作品关联的产品
         this.work.product = JSON.parse(JSON.stringify(this.work.productData));
         if (sku) {
             this.work.product.sku = sku;

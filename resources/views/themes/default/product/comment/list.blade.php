@@ -5,7 +5,7 @@
 
 @section('content')
 @include('layouts.includes.breadcrumb')
-<!--主體區域-->
+<!--主体区域-->
 <div class="st-main">
     <div class="container">
         <div class="st-main-detail-reviews-header">
@@ -37,7 +37,7 @@
             </dl>
             @endforeach
         </div>
-        <!--分頁-->
+        <!--分页-->
         <nav aria-label="Page navigation">
             {{$rows->links()}}
         </nav>

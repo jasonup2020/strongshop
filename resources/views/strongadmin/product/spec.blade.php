@@ -1,7 +1,7 @@
 @if(isset($specs) && isset($productSpecs))
-<!--價格規格-->
+<!--价格规格-->
 <fieldset class="layui-elem-field">
-    <legend>價格規格<font class="st-sepc-tip">（作為產品價格屬性選擇）</font></legend>
+    <legend>价格规格<font class="st-sepc-tip">（作为产品价格属性选择）</font></legend>
     <div class="layui-field-box">
         <div class="layui-form-item">
             @foreach ($specs as $spec)
@@ -24,9 +24,9 @@
         </div>
     </div>
 </fieldset>
-<!--普通規格-->
+<!--普通规格-->
 <fieldset class="layui-elem-field">
-    <legend>普通規格 <font class="st-sepc-tip">（作為普通產品參數顯示）</font></legend>
+    <legend>普通规格 <font class="st-sepc-tip">（作为普通产品参数显示）</font></legend>
     <div class="layui-field-box">
         @foreach ($specs as $spec)
         @if($spec['spec_type']==2)

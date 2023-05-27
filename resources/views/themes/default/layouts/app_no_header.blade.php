@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{env('APP_VERSION')}}">
-        <!-- Scripts 相容 ie8 自適應 -->
+        <!-- Scripts 兼容 ie8 自适应 -->
         <script src="{{ asset('js/vendor/modernizr-2.8.3-respond-1.4.2.min.js') }}"></script>
         @stack('styles')
         @stack('scripts')

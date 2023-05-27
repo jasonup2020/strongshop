@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">{{$model->getAttributeLabel('status')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="開啟" @if($model->status==1)checked @endif>
+                    <input type="radio" name="status" value="1" title="开启" @if($model->status==1)checked @endif>
                     <input type="radio" name="status" value="2" title="禁用" @if($model->status==2)checked @endif>
                 </div>
             </div>
@@ -63,28 +63,28 @@
 @push('scripts_bottom')
 <script>
     !function () {
-        //普通圖片上傳
+        //普通图片上传
         var uploadInst = layui.upload.render({
             elem: '#test1'
-            , url: '/strongadmin/upload/image' //改成您自己的上傳介面
+            , url: '/strongadmin/upload/image' //改成您自己的上传接口
             , before: function (obj) {
-                //預讀本地檔案示例，不支援ie8
+                //预读本地文件示例，不支持ie8
                 obj.preview(function (index, file, result) {
-                    $('#demo1').attr('src', result); //圖片鏈接（base64）
+                    $('#demo1').attr('src', result); //图片链接（base64）
                 });
             }
             , done: function (res) {
-                //如果上傳失敗
+                //如果上传失败
                 if (res.code > 0) {
-                    return layer.msg('上傳失敗');
+                    return layer.msg('上传失败');
                 }
-                //上傳成功
+                //上传成功
                 $(":input[name=logo]").val(res.data.src);
             }
             , error: function () {
-                //演示失敗狀態，並實現重傳
+                //演示失败状态，并实现重传
                 var demoText = $('#demoText');
-                demoText.html('<span style="color: #FF5722;">上傳失敗</span> <a class="layui-btn layui-btn-xs demo-reload">重試</a>');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
                 demoText.find('.demo-reload').on('click', function () {
                     uploadInst.upload();
                 });

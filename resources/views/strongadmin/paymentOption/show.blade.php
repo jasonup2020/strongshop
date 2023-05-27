@@ -19,7 +19,7 @@
     </colgroup>
     <thead>
         <tr>
-            <th colspan="4" style="text-align: center;background: #eee;">基本資訊</th>
+            <th colspan="4" style="text-align: center;background: #eee;">基本信息</th>
         </tr> 
     </thead>
     <tbody>

@@ -38,7 +38,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label st-form-input-required"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('status')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="啟用" @if($model->status==1)checked @endif>
+                    <input type="radio" name="status" value="1" title="启用" @if($model->status==1)checked @endif>
                     <input type="radio" name="status" value="2" title="禁用" @if($model->status==2)checked @endif>
                     <div class="layui-word-aux st-form-tip"></div>
                 </div>

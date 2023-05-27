@@ -49,21 +49,21 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/userPushNotification/create', this.innerText);">新增</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/userPushNotification/destroy">刪除選中</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/userPushNotification/create', this.innerText);">添加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/user/userPushNotification/destroy">删除选中</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/user/userPushNotification/update?id={{d.id}}', this.innerText);">更新</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/userPushNotification/destroy?id={{d.id}}');">刪除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/user/userPushNotification/destroy?id={{d.id}}');">删除</a>
     @endverbatim
 </script>
 @endsection
@@ -77,17 +77,17 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'type', title: '{{$model->getAttributeLabel("type")}}', width: 150, sort: true, templet: function (res) {
-                    return  res.type==1  ? '<span class="layui-badge layui-bg-cyan">郵件</span>' : '<span class="layui-badge layui-bg-cyan">簡訊</span>';
+                    return  res.type==1  ? '<span class="layui-badge layui-bg-cyan">邮件</span>' : '<span class="layui-badge layui-bg-cyan">短信</span>';
                     }}
                 , {field: 'title', title: '{{$model->getAttributeLabel("title")}}', width: 250, sort: true}
                 , {field: 'send_at', title: '{{$model->getAttributeLabel("send_at")}}', width: 150, sort: true}
                 , {field: 'status', title: '{{$model->getAttributeLabel("status")}}', width: 150, sort: true, templet: function (res) {
-                    return  res.status==1  ? '<span class="layui-badge layui-bg-green">正常發送</span>' : '<span class="layui-badge">已取消發送</span>';
+                    return  res.status==1  ? '<span class="layui-badge layui-bg-green">正常发送</span>' : '<span class="layui-badge">已取消发送</span>';
                     }}
                 , {field: 'created_at', title: '{{$model->getAttributeLabel("created_at")}}', width: 150, sort: true}
                 , {field: 'updated_at', title: '{{$model->getAttributeLabel("updated_at")}}', width: 150, sort: true}

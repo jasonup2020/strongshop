@@ -96,24 +96,24 @@
             </div>
         </div>
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
 <table class="layui-hide" id="ST-TABLE-LIST" lay-filter="ST-TABLE-LIST"></table>
 <script type="text/html" id="ST-TOOL-BAR">
     <div class="layui-btn-container st-tool-bar">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/order/create', this.innerText);">新增</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/order/destroy">刪除選中</a>
-        <a class="layui-btn layui-btn-xs" lay-event="batchPrint" data-href="/strongadmin/order/print">批量列印</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/order/create', this.innerText);">添加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchDelete" data-href="/strongadmin/order/destroy">删除选中</a>
+        <a class="layui-btn layui-btn-xs" lay-event="batchPrint" data-href="/strongadmin/order/print">批量打印</a>
     </div>
 </script>
 <script type="text/html" id="ST-OP-BUTTON">
     @verbatim
-    <a class="layui-btn layui-btn-xs" onclick="Util.createWindow('/strongadmin/order/show?id={{d.id}}', this.innerText);">檢視</a>
+    <a class="layui-btn layui-btn-xs" onclick="Util.createWindow('/strongadmin/order/show?id={{d.id}}', this.innerText);">查看</a>
     <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/order/update?id={{d.id}}', this.innerText, ['65%', '75%']);">更新</a>
     <hr />
-    <a class="layui-btn layui-btn-xs" href="/strongadmin/order/print?id={{d.id}}" target="_blank">列印</a>
+    <a class="layui-btn layui-btn-xs" href="/strongadmin/order/print?id={{d.id}}" target="_blank">打印</a>
     <a class="layui-btn layui-btn-xs" lay-event="more">更多 <i class="layui-icon layui-icon-down"></i></a>
     @endverbatim
 </script>
@@ -128,10 +128,10 @@
     layui.laydate.render({
         elem: '#date2'
     });
-    //表格欄位
+    //表格字段
     var cols = [
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+                , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
                 , {field: 'order_no', title: '{{$model->getAttributeLabel("order_no")}}', width: 180, fixed: 'left', sort: true, templet: function (res) {
                         var html = res.order_no + '<br/><br/>';
                         html += '<span class="layui-badge '+res.order_status_style+'">'+res.order_status_label+'</span>'
@@ -142,7 +142,7 @@
                         html += '<br/><br/>' + res.created_at;
                         return  html;
                 }}
-                , {field: 'country', title: '收貨資訊', width: 310, templet: function (res) {
+                , {field: 'country', title: '收货信息', width: 310, templet: function (res) {
                         var html = '';
                         html += res.first_name + ' ' + res.last_name;
                         html += ' [' + res.country + ']';
@@ -189,10 +189,10 @@
                 }}
                 , {field: 'pay_remark', title: '{{$model->getAttributeLabel("pay_remark")}}', width: 150, sort: true}
                 , {field: 'shipping_option_id', title: '{{$model->getAttributeLabel("shipping_option_id")}}', width: 150, sort: true, templet: function (res) {
-                        return res.shipping_option.title +'<br/>' + '跟蹤單號：' + res.tracking_no;
+                        return res.shipping_option.title +'<br/>' + '跟踪单号：' + res.tracking_no;
                 }}
                 , {field: 'payment_option_id', title: '{{$model->getAttributeLabel("payment_option_id")}}', width: 150, sort: true, templet: function (res) {
-                        return res.payment_option.title + '<br/>' + '交易單號：' + res.transaction_id;
+                        return res.payment_option.title + '<br/>' + '交易单号：' + res.transaction_id;
                 }}
                 , {field: 'remark', title: '{{$model->getAttributeLabel("remark")}}', width: 150, sort: true}
                 , {field: 'shipped_at', title: '{{$model->getAttributeLabel("shipped_at")}}', width: 150, sort: true}
@@ -209,7 +209,7 @@
     var tableIns = Util.renderTable(tableConfig);
     
     var tableId = tableIns.config.id;
-    //工具欄事件
+    //工具栏事件
     layui.table.on('toolbar(' + tableId + ')', function (obj) {
         var checkStatus = layui.table.checkStatus(obj.config.id);
         switch (obj.event) {
@@ -236,39 +236,39 @@
     var that = this,d = obj.data;
     console.log(d)
     if(obj.event === 'more'){
-        //更多下拉菜單
+        //更多下拉菜单
         var dataOp = [];
         if(d.order_status === 10 || d.order_status === 13 || d.order_status === 14){
             dataOp = dataOp.concat([
-                {title: '確認已付款',id: 'paid'}
-                ,{title: '關閉訂單',id: 'close'}
+                {title: '确认已付款',id: 'paid'}
+                ,{title: '关闭订单',id: 'close'}
 
             ]);
         }else if(d.order_status === 12){
             dataOp = dataOp.concat([
-                {title: '確認發貨',id: 'shipped'}
+                {title: '确认发货',id: 'shipped'}
             ]);
         }else if(d.order_status === 20){
             dataOp = dataOp.concat([
-                {title: '確認退貨',id: 'returned'}
-                ,{title: '確認完成',id: 'done'}
+                {title: '确认退货',id: 'returned'}
+                ,{title: '确认完成',id: 'done'}
             ]);
         }else if(d.order_status === 42){
             dataOp = dataOp.concat([
-                {title: '刪除',id: 'del'}
+                {title: '删除',id: 'del'}
             ]);
         }
       layui.dropdown.render({
         elem: that
-        ,show: true //外部事件觸發即顯示
+        ,show: true //外部事件触发即显示
         ,data: dataOp
         ,click: function(data, othis){
             if(data.id === 'shipped'){
-                Util.createFormWindow('/strongadmin/order/confirm/shipped?id='+d.id, '確認發貨');
+                Util.createFormWindow('/strongadmin/order/confirm/shipped?id='+d.id, '确认发货');
                 return;
             }
-            layer.confirm('確定'+data.title+'?', function(index){
-                //根據 id 做出不同操作
+            layer.confirm('确定'+data.title+'?', function(index){
+                //根据 id 做出不同操作
                 if(data.id === 'del'){
                     $.post('/strongadmin/order/destroy', {id:d.id}).then(response => {
                         if (response.code === 200) {
@@ -286,7 +286,7 @@
                         if (response.code === 200) {
                             layer.close(index);
                             layer.msg(response.message, {time: 1500});
-                            //過載重新整理
+                            //重载刷新
                             tableIns.reload();
                         }else{
                             layer.msg(response.message, {anim: 6});
@@ -297,20 +297,20 @@
                         if (response.code === 200) {
                             layer.close(index);
                             layer.msg(response.message, {time: 1500});
-                            //過載重新整理
+                            //重载刷新
                             tableIns.reload();
                         }else{
                             layer.msg(response.message, {anim: 6});
                         }
                     });
                 } else if(data.id === 'shipped'){
-                    Util.createFormWindow('/strongadmin/order/confirm/shipped?id='+d.id, '確認發貨');
+                    Util.createFormWindow('/strongadmin/order/confirm/shipped?id='+d.id, '确认发货');
                 } else if(data.id === 'returned'){
                     $.post('/strongadmin/order/confirm/returned', {id:d.id}).then(response => {
                         if (response.code === 200) {
                             layer.close(index);
                             layer.msg(response.message, {time: 1500});
-                            //過載重新整理
+                            //重载刷新
                             tableIns.reload();
                         }else{
                             layer.msg(response.message, {anim: 6});
@@ -321,7 +321,7 @@
                         if (response.code === 200) {
                             layer.close(index);
                             layer.msg(response.message, {time: 1500});
-                            //過載重新整理
+                            //重载刷新
                             tableIns.reload();
                         }else{
                             layer.msg(response.message, {anim: 6});
@@ -330,7 +330,7 @@
                 }
             });
         }
-        ,style: 'margin-left: -45px; box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' //設定額外樣式
+        ,style: 'margin-left: -45px; box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' //设置额外样式
       }); 
     }
   });

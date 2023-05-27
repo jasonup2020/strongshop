@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
-        <!--主體左側-產品圖冊資訊-->
+        <!--主体左侧-产品图册信息-->
         <div class="col-sm-12 col-md-7 col-lg-5">
-            <!--PC端輪播圖-->
+            <!--PC端轮播图-->
             <div class="st-detail-img hidden-xs hidden-sm">
                 <div class="st-detail-img-left pull-left">
                     <ul>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <!--移動端輪播圖-->
+            <!--移动端轮播图-->
             <div class="st-detail-img visible-xs visible-sm">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
@@ -50,7 +50,7 @@
         </div>
         <div class="col-sm-12 col-md-5 col-lg-7">
             <div class="row">
-                <!--主體右側-產品屬性資訊-->
+                <!--主体右侧-产品属性信息-->
                 <div class="col-sm-12 col-lg-7">
                     <div class="st-detail-attr">
                         <h3>{{$row->title}}</h3>
@@ -76,10 +76,10 @@
                         @endforeach
                     </div>
                 </div>
-                <!--主體右側-操作按鈕-->
+                <!--主体右侧-操作按钮-->
                 <div class="col-sm-12 col-lg-5 st-detail-btn">
                     <div class="st-detail-btn-right">
-                        <!--批發資訊-->
+                        <!--批发信息-->
                         @if(count($row->wholesale_set['num']))
                         <div class="st-whosale">
                             <table class="table">
@@ -104,17 +104,17 @@
                             </table>
                         </div>
                         @endif
-                        <!--庫存狀態-->
+                        <!--库存状态-->
                         @if($row->stock_status == 1 && $row->stock >0)
                         <p class="st-instock">{{$row->stock}} @lang('in stock').</p>
                         @else
                         <p class="st-stockout">@lang('Stock Out.')</p>
                         @endif
-                        <!--購物數量-->
+                        <!--购物数量-->
                         <p class="st-qty">
                             @lang('QTY'): <input id="ST-QTY" name="qty" value="1" type="number" min="1" max="99999" />
                         </p>
-                        <!--按鈕-->
+                        <!--按钮-->
                         <p class="st-btn">
                             <button class="btn btn-primary addtocart" onclick="Util.addtocart({{$row->id}}, $('#ST-QTY').val())">
                                 <span class="glyphicon glyphicon-shopping-cart"></span>@lang('ADD TO CART')

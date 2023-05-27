@@ -59,14 +59,14 @@
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="layui-icon layui-icon-help st-form-tip-help"></i>{{$model->getAttributeLabel('password')}}</label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" value="" autocomplete="off" placeholder="" class="layui-input" data-tips="填寫后即重置密碼">
+                    <input type="text" name="password" value="" autocomplete="off" placeholder="" class="layui-input" data-tips="填写后即重置密码">
                     <div class="layui-word-aux st-form-tip"></div>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label st-form-input-required">{{$model->getAttributeLabel('status')}}</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="status" value="1" title="開啟" @if($model->status==1)checked @endif>
+                    <input type="radio" name="status" value="1" title="开启" @if($model->status==1)checked @endif>
                     <input type="radio" name="status" value="2" title="禁用" @if($model->status==2)checked @endif>
                     <div class="layui-word-aux st-form-tip"></div>
                 </div>

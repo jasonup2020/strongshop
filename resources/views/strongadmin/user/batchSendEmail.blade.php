@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">訂單為零</label>
+            <label class="layui-form-label">订单为零</label>
             <div class="layui-input-inline">
                 <input type="text" name="no_order_at_begin" id="date3" placeholder="年-月-日" autocomplete="off" class="layui-input">
             </div>
@@ -75,7 +75,7 @@
             </div>
         </div> 
         <div class="layui-inline">
-            <a class="layui-btn layui-btn-xs st-search-button">開始搜索</a>
+            <a class="layui-btn layui-btn-xs st-search-button">开始搜索</a>
         </div>
     </div>
 </form>
@@ -85,37 +85,37 @@
 <form class="layui-form" id="ST-FORM" action="">
     <div class="layui-row">
         <div class="layui-form-item">
-            <label class="layui-form-label">郵件標題</label>
+            <label class="layui-form-label">邮件标题</label>
             <div class="layui-input-block">
                 <input type="text" name="title" value="" autocomplete="off" placeholder="" class="layui-input" >
                 <div class="layui-word-aux st-form-tip"></div>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">郵件內容</label>
+            <label class="layui-form-label">邮件内容</label>
             <div class="layui-input-block">
                 <textarea  name="content"  autocomplete="off" placeholder="" class="layui-textarea layui-hide" id="LAY_ditor" lay-verify="details"></textarea>
                 <div class="layui-word-aux st-form-tip"></div>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">發送時間</label>
+            <label class="layui-form-label">发送时间</label>
             <div class="layui-input-block">
                 <input type="text" name="sendtime" id="sendtime" placeholder="年-月-日" autocomplete="off" class="layui-input">
                 <div class="layui-word-aux st-form-tip"></div>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label"><i class="layui-icon layui-icon-help st-form-tip-help"></i>備註</label>
+            <label class="layui-form-label"><i class="layui-icon layui-icon-help st-form-tip-help"></i>备注</label>
             <div class="layui-input-block">
                 <input type="text" name="remark" autocomplete="off" class="layui-input">
-                <div class="layui-word-aux st-form-tip">僅作為發送記錄備註，和發送郵件內容無關。</div>
+                <div class="layui-word-aux st-form-tip">仅作为发送记录备注，和发送邮件内容无关。</div>
             </div>
         </div>
         <div class="layui-form-item st-form-submit-btn">
             <div class="layui-input-block">
-                <button type="submit" class="layui-btn" lay-submit="" lay-filter="ST-SUBMIT">確認提交 (目前搜索條件下全部會員)</button>
-                <a class="layui-btn" href="/strongadmin/user/userPushNotification/index">檢視歷史記錄</a>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="ST-SUBMIT">确认提交 (当前搜索条件下全部会员)</button>
+                <a class="layui-btn" href="/strongadmin/user/userPushNotification/index">查看历史记录</a>
             </div>
         </div>
     </div>
@@ -125,12 +125,12 @@
 @push('scripts_bottom')        
 <script>
     !function () {
-        //建立一個編輯器
+        //创建一个编辑器
         var editIndex = layui.layedit.build('LAY_ditor', {
             uploadImage: {url: '/strongadmin/upload/image', type: 'post'},
             tool: ['strong', , 'italic', 'underline', 'del', '|', 'left', 'center', 'right', '|', 'link', 'unlink', '|', 'image']
         });
-        //自定義驗證規則
+        //自定义验证规则
         layui.form.verify({
             details: function (value) {
                 layui.layedit.sync(editIndex);
@@ -153,16 +153,16 @@
             elem: '#sendtime',
             type: 'datetime'
         });
-        //表格欄位
+        //表格字段
         var cols = [
             {type: 'checkbox', fixed: 'left'}
-            , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合計', sort: true}
+            , {field: 'id', title: 'id', width: 60, fixed: 'left', unresize: true, totalRowText: '合计', sort: true}
             , {field: 'email', title: '{{$model->getAttributeLabel("email")}}', width: 300, sort: true, templet: function (res) {
                     var html = '';
                     if (res.email_verified_at) {
-                        html += '<span class="layui-badge layui-bg-green">已驗證</span>';
+                        html += '<span class="layui-badge layui-bg-green">已验证</span>';
                     } else {
-                        html += '<span class="layui-badge layui-bg-orange">未驗證</span>';
+                        html += '<span class="layui-badge layui-bg-orange">未验证</span>';
                     }
                     html += ' ' + res.email;
                     return html;
@@ -192,7 +192,7 @@
                     if (res.mobile_verified_at) {
                         return  res.mobile_verified_at;
                     }
-                    return '<span class="layui-badge layui-bg-orange">未驗證</span>';
+                    return '<span class="layui-badge layui-bg-orange">未验证</span>';
                 }}
             , {field: 'gender', title: '{{$model->getAttributeLabel("gender")}}', width: 150, sort: true, templet: function (res) {
                     return res.gender == 0 ? '保密' : (res.gender == 1 ? '男' : '女');
@@ -203,20 +203,20 @@
         var tableConfig = {
             cols: [cols]
             , method: 'post'
-            , toolbar: false //工具欄
-            , height: 'full-500'//高度最大適應化
+            , toolbar: false //工具栏
+            , height: 'full-500'//高度最大适应化
         };
         //表格渲染
         Util.renderTable(tableConfig);
-        //監聽提交
+        //监听提交
         layui.form.on('submit(ST-SUBMIT)', function (data) {
             var searchData = layui.form.val("ST-FORM-SEARCH");
             searchData.batchSendMail = data.field;
-            //提交json數據
+            //提交json数据
             var postDatas = JSON.stringify(searchData);
             Util.postForm('#ST-FORM', postDatas, false, 'application/json;charset=utf-8');
             //layer.alert(JSON.stringify(data.field), {
-            //    title: '最終的提交資訊'
+            //    title: '最终的提交信息'
             //});
             return false;
         });

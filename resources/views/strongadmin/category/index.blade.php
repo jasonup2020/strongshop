@@ -9,20 +9,20 @@
 <div class="st-h15"></div>
 <div class="layui-container st-body">
     <div class="layui-btn-container">
-        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/category/create?parent_name=頂級分類', this.innerText);">新增一級分類</a>
+        <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/category/create?parent_name=顶级分类', this.innerText);">添加一级分类</a>
         @if(request('down'))
-        <a class="layui-btn layui-btn-xs" href="?down=0">預設收縮全部</a>
+        <a class="layui-btn layui-btn-xs" href="?down=0">默认收缩全部</a>
         @else
-        <a class="layui-btn layui-btn-xs" href="?down=1">預設展開全部</a>
+        <a class="layui-btn layui-btn-xs" href="?down=1">默认展开全部</a>
         @endif
     </div>
     <table class="layui-table st-tree" lay-size="sm" lay-skin="nob" id="ST-TREE">
         <thead>
             <tr>
-                <th>分類名稱</th>
+                <th>分类名称</th>
                 <th>排序</th>
-                <th>狀態</th>
-                <th>新增時間</th>
+                <th>状态</th>
+                <th>添加时间</th>
                 <th>操作</th>
             </tr> 
         </thead>
@@ -35,16 +35,16 @@
                 <td>{{$row->sort}}</td>
                 <td>
                     @if($row->status==1)
-                    <button class="layui-btn layui-btn-xs st-btn-bg-succ">開啟</button>
+                    <button class="layui-btn layui-btn-xs st-btn-bg-succ">开启</button>
                     @else
                     <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-danger">禁用</button>
                     @endif
                 </td>
                 <td>{{$row->created_at}}</td>
                 <td>
-                    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/category/create?level=2&parent_id={{$row->id}}&parent_name=', this.innerText);">新增</a>
-                    <a class="layui-btn layui-btn-xs layui-btn-normal" onclick="Util.createFormWindow('/strongadmin/product/category/update?id={{$row->id}}&parent_name=頂級菜單', this.innerText);">更新</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/category/destroy?id={{$row->id}}');">刪除</a>
+                    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/category/create?level=2&parent_id={{$row->id}}&parent_name=', this.innerText);">添加</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-normal" onclick="Util.createFormWindow('/strongadmin/product/category/update?id={{$row->id}}&parent_name=顶级菜单', this.innerText);">更新</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/category/destroy?id={{$row->id}}');">删除</a>
                 </td>
             </tr>
             @foreach ($row->children as $child)
@@ -56,16 +56,16 @@
                 <td>{{$child->sort}}</td>
                 <td>
                     @if($child->status==1)
-                    <button class="layui-btn layui-btn-xs st-btn-bg-succ">開啟</button>
+                    <button class="layui-btn layui-btn-xs st-btn-bg-succ">开启</button>
                     @else
                     <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-danger">禁用</button>
                     @endif
                 </td>
                 <td>{{$child->created_at}}</td>
                 <td>
-                    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/category/create?level=3&parent_id={{$child->id}}&parent_name=', this.innerText);">新增</a>
+                    <a class="layui-btn layui-btn-xs" onclick="Util.createFormWindow('/strongadmin/product/category/create?level=3&parent_id={{$child->id}}&parent_name=', this.innerText);">添加</a>
                     <a class="layui-btn layui-btn-xs layui-btn-normal" onclick="Util.createFormWindow('/strongadmin/product/category/update?id={{$child->id}}&parent_name=', this.innerText);">更新</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/category/destroy?id={{$child->id}}');">刪除</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/category/destroy?id={{$child->id}}');">删除</a>
                 </td>
             </tr>
             @foreach ($child->children as $child2)
@@ -78,16 +78,16 @@
                 <td>{{$child2->sort}}</td>
                 <td>
                     @if($child2->status==1)
-                    <button class="layui-btn layui-btn-xs st-btn-bg-succ">開啟</button>
+                    <button class="layui-btn layui-btn-xs st-btn-bg-succ">开启</button>
                     @else
                     <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-danger">禁用</button>
                     @endif
                 </td>                        
                 <td>{{$child2->created_at}}</td>
                 <td>
-                    <a class="layui-btn layui-btn-xs layui-btn-disabled">新增</a>
+                    <a class="layui-btn layui-btn-xs layui-btn-disabled">添加</a>
                     <a class="layui-btn layui-btn-xs layui-btn-normal" onclick="Util.createFormWindow('/strongadmin/product/category/update?id={{$child2->id}}&parent_name=', this.innerText);">更新</a>
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/category/destroy?id={{$child2->id}}&parent_name=');">刪除</a>
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" onclick="Util.destroy('/strongadmin/product/category/destroy?id={{$child2->id}}&parent_name=');">删除</a>
                 </td>
             </tr>
             @endforeach

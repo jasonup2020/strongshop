@@ -74,7 +74,7 @@
 
 @section('content')
 @include('layouts.includes.breadcrumb')
-<!--主體區域-->
+<!--主体区域-->
 <div class="container">
     <div class="st-checkout" style="min-height:500px;">
         <div class="st-h50"></div>
@@ -104,7 +104,7 @@
             var widthStr = width + '%';
             $('.progress-bar').css({width: widthStr});
         }, 50);
-        //自動提交支付
+        //自动提交支付
         $('form').submit();
     }
     ();

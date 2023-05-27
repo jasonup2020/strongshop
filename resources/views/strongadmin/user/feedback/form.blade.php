@@ -86,13 +86,13 @@
     <div class="layui-row">
         <div class="layui-col-xs11">
             <div class="layui-form-item">
-                <label class="layui-form-label st-form-input-required">郵件通知</label>
+                <label class="layui-form-label st-form-input-required">邮件通知</label>
                 <div class="layui-input-block">
                     <input type="checkbox" checked="" name="emailNotify" lay-skin="switch" lay-text="通知|不通知">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label st-form-input-required">回覆內容</label>
+                <label class="layui-form-label st-form-input-required">回复内容</label>
                 <div class="layui-input-block">
                     <textarea  name="content"  class="layui-textarea" rows="8"></textarea>
                     <div class="layui-word-aux st-form-tip"></div>
