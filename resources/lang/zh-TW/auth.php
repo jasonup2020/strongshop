@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'failed'   => '用户名或密码错误',
-    'throttle' => '您尝试的登录次数过多，请 :seconds 秒后再试。',
+    'failed'   => '使用者名稱或密碼錯誤',
+    'throttle' => '您嘗試的登錄次數過多，請 :seconds 秒后再試。',
 ];
